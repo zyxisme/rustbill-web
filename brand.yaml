@@ -8,6 +8,7 @@ accent: "#06b6d4"
 
 logo:
   type: "svg"
+  # 注意：内联 SVG 含硬编码颜色。修改 accent 后需手动更新 SVG 中的 fill/stroke 色值。
   svg: |
     <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="32" height="32" rx="6" fill="#090c10" />
