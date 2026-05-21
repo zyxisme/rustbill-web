@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme {
+  /* ── Surface ladder ── */
+  --color-canvas: #090c10;
+  --color-canvas-soft: #11161e;
+  --color-canvas-soft-2: #1a1f2e;
+
+  /* ── Brand accent ── */
+  --color-primary: #06b6d4;
+  --color-primary-hover: #0891b2;
+  --color-primary-foreground: #021a1f;
+
+  /* ── Text ── */
+  --color-ink: #e1e6eb;
+  --color-body: #9ca3af;
+  --color-mute: #6b7280;
+
+  /* ── Borders ── */
+  --color-hairline: #1f2937;
+  --color-hairline-strong: #374151;
+
+  /* ── Links ── */
+  --color-link: #22d3ee;
+  --color-link-deep: #0891b2;
+  --color-link-bg-soft: #0f2d3a;
+
+  /* ── Semantic ── */
+  --color-success: #22d3ee;
+  --color-error: #ef4444;
+  --color-error-soft: #3b121a;
+  --color-error-deep: #b91c1c;
+  --color-warning: #f59e0b;
+  --color-warning-soft: #2d1f0a;
+  --color-warning-deep: #b45309;
+  --color-violet: #8b5cf6;
+  --color-violet-soft: #1e1738;
+  --color-violet-deep: #6d28d9;
+
+  /* ── Cyan scale ── */
+  --color-cyan: #06b6d4;
+  --color-cyan-soft: #0f2d3a;
+  --color-cyan-deep: #0891b2;
+  --color-highlight-cyan: #22d3ee;
+  --color-highlight-teal: #2dd4bf;
+
+  /* ── Gradient ── */
+  --color-gradient-start: #06b6d4;
+  --color-gradient-mid: #0891b2;
+  --color-gradient-end: #0e7490;
+
+  /* ── Selection ── */
+  --color-selection-bg: #06b6d4;
+  --color-selection-fg: #021a1f;
+
+  /* ── Typography ── */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+  /* ── Radius ── */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill-sm: 64px;
+  --radius-pill: 100px;
+  --radius-full: 9999px;
+
+  /* ── Spacing (base 4px) ── */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 96px;
+  --spacing-6xl: 128px;
+  --spacing-section: 192px;
+}
+
+/* ── Base ── */
+* {
+  border-color: var(--color-hairline);
+}
+
+::selection {
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-fg);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mute);
+}
+
+/* ── Toast animation ── */
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

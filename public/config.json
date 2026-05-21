@@ -1,0 +1,5 @@
+{
+  "grpcEndpoint": "",
+  "appTitle": "RustBill",
+  "adminUrl": "/admin"
+}
