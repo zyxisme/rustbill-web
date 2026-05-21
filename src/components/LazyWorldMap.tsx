@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { clusters, accent } from 'virtual:brand';
+import mapDataJson from '@/assets/map-data.json';
 
 interface ClusterMarker {
   lat: number;
@@ -47,18 +48,18 @@ export default function LazyWorldMap() {
     return () => obs.disconnect();
   }, []);
 
-  // Dynamic import dotted-map + generate SVG
+  // Dynamic import lightweight dotted-map renderer (4KB, no country data)
   useEffect(() => {
     if (!visible || loadedRef.current) return;
     loadedRef.current = true;
 
     let cancelled = false;
 
-    import('dotted-map').then((mod) => {
+    import('dotted-map/without-countries').then((mod) => {
       if (cancelled) return;
       const DottedMap = mod.default;
 
-      const map = new DottedMap({ height: 35, grid: 'diagonal' });
+      const map = new DottedMap({ map: mapDataJson as any });
 
       for (const c of clusters) {
         map.addPin({
@@ -81,17 +82,15 @@ export default function LazyWorldMap() {
       const w = vbMatch ? parseFloat(vbMatch[1]) : 900;
       const h = vbMatch ? parseFloat(vbMatch[2]) : 450;
 
-      // Modify SVG: add title elements to pin circles for native tooltips
+      // Find pin circles in the SVG (pins have larger radius)
       const parser = new DOMParser();
       const doc = parser.parseFromString(svg, 'image/svg+xml');
       const circles = doc.querySelectorAll('circle');
 
-      // Pins have larger radius (0.5 vs 0.2 base), identifiable by radius
       const pinData: PinPoint[] = [];
       for (const c of circles) {
         const r = parseFloat(c.getAttribute('r') || '0');
         if (r >= 0.4) {
-          // Find matching cluster by fill color (accent)
           const fill = c.getAttribute('fill');
           if (fill && clusters.length > 0) {
             const cx = parseFloat(c.getAttribute('cx') || '0');
@@ -101,8 +100,7 @@ export default function LazyWorldMap() {
         }
       }
 
-      // Remove duplicate pin overlays (dotted-map may render pins in nested groups)
-      // Take unique pin positions
+      // Deduplicate pin positions
       const uniquePins: PinPoint[] = [];
       const seen = new Set<string>();
       for (const p of pinData) {
