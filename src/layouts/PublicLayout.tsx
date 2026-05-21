@@ -43,20 +43,22 @@ export default function PublicLayout() {
     <div className="min-h-screen flex flex-col bg-canvas">
       {/* Nav */}
       <header className="sticky top-0 z-50 h-16 bg-canvas border-b border-hairline">
-        <div className="mx-auto max-w-[1400px] h-full flex items-center justify-between px-6 relative">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
-            <BrandLogo />
-            {logo && <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>}
-          </Link>
+        <div className="mx-auto max-w-[1400px] h-full flex items-center px-6">
+          {/* Left: Logo */}
+          <div className="flex-1 flex justify-start">
+            <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
+              <BrandLogo />
+              {logo && <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>}
+            </Link>
+          </div>
 
-          {/* Desktop nav — centered */}
-          <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {/* Center: Nav */}
+          <nav className="hidden md:flex items-center gap-1">
             <NavMenu items={navItems} />
           </nav>
 
-          {/* Right actions */}
-          <div className="hidden md:flex items-center gap-2">
+          {/* Right: Actions */}
+          <div className="hidden md:flex flex-1 justify-end items-center gap-2">
             <button
               onClick={toggleLang}
               className="flex items-center gap-1 text-body text-sm hover:text-ink transition-colors bg-transparent border-0 cursor-pointer px-2 py-1"
