@@ -4,6 +4,21 @@ import { Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth';
 import { useState } from 'react';
+import { brandName, logo, tagline, header } from 'virtual:brand';
+import NavMenu from '@/components/NavMenu';
+
+function BrandLogo() {
+  if (!logo) {
+    return <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>;
+  }
+  if (logo.type === 'svg' && logo.svg) {
+    return <span dangerouslySetInnerHTML={{ __html: logo.svg }} />;
+  }
+  if (logo.type === 'url' && logo.url) {
+    return <img src={logo.url} alt={brandName} className="h-6 w-auto" />;
+  }
+  return <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>;
+}
 
 export default function PublicLayout() {
   const { t, i18n } = useTranslation();
@@ -12,16 +27,15 @@ export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isDashboard = location.pathname.startsWith('/dashboard');
+  const navItems = header?.nav ?? [
+    { i18n: 'nav.home', href: '/' },
+    { i18n: 'nav.catalog', href: '/catalog' },
+  ];
 
   const toggleLang = () => {
     const next = i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN';
     i18n.changeLanguage(next);
   };
-
-  const navLinks = [
-    { href: '/', label: t('nav.home') },
-    { href: '/catalog', label: t('nav.catalog') },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-canvas">
@@ -30,29 +44,13 @@ export default function PublicLayout() {
         <div className="mx-auto max-w-[1400px] h-full flex items-center justify-between px-6 relative">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="6" fill="#090c10" />
-              <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
-              <circle cx="16" cy="17" r="3" fill="#06b6d4" />
-            </svg>
-            RustBill
+            <BrandLogo />
+            {logo && <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>}
           </Link>
 
           {/* Desktop nav — centered */}
           <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`px-3 py-1.5 text-sm rounded-full transition-colors no-underline ${
-                  location.pathname === link.href
-                    ? 'text-ink bg-canvas-soft'
-                    : 'text-body hover:text-ink hover:bg-canvas-soft'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <NavMenu items={navItems} />
           </nav>
 
           {/* Right actions */}
@@ -100,18 +98,7 @@ export default function PublicLayout() {
         {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`block text-sm no-underline ${
-                  location.pathname === link.href ? 'text-ink' : 'text-body'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <NavMenu items={navItems} mobile />
             <div className="pt-2 border-t border-hairline flex items-center gap-2">
               {user ? (
                 <>
@@ -169,14 +156,14 @@ export default function PublicLayout() {
             </div>
           </div>
           <div>
-            <div className="text-sm font-mono text-mute uppercase tracking-wider mb-4">RustBill</div>
+            <div className="text-sm font-mono text-mute uppercase tracking-wider mb-4">{brandName}</div>
             <p className="text-sm text-mute">
-              {t('footer.tagline')}
+              {tagline || t('footer.tagline')}
             </p>
           </div>
         </div>
         <div className="mx-auto max-w-[1400px] mt-12 pt-8 border-t border-hairline text-center text-xs text-mute">
-          &copy; {new Date().getFullYear()} RustBill. {t('footer.rights')}
+          &copy; {new Date().getFullYear()} {brandName}. {t('footer.rights')}
         </div>
       </footer>
     </div>

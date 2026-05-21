@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuthStore } from '@/stores/auth';
+import { brandName } from 'virtual:brand';
 import PublicLayout from '@/layouts/PublicLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import Home from '@/pages/Home';
@@ -30,9 +31,17 @@ function AppInit({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function AppTitle() {
+  useEffect(() => {
+    document.title = brandName;
+  }, []);
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
+      <AppTitle />
       <AppInit>
         <Routes>
           {/* Public pages */}

@@ -1,14 +1,7 @@
 import { useState } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  LayoutDashboard,
-  ShoppingCart,
-  Server,
-  FileText,
-  Ticket,
-  Wallet,
-  Settings,
   ChevronLeft,
   LogOut,
   Globe,
@@ -17,25 +10,15 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/stores/auth';
-
-const navItems = [
-  { href: '/dashboard', icon: LayoutDashboard, labelKey: 'nav.overview' },
-  { href: '/dashboard/orders', icon: ShoppingCart, labelKey: 'nav.myOrders' },
-  { href: '/dashboard/instances', icon: Server, labelKey: 'nav.myInstances' },
-  { href: '/dashboard/invoices', icon: FileText, labelKey: 'nav.myInvoices' },
-  { href: '/dashboard/tickets', icon: Ticket, labelKey: 'nav.myTickets' },
-  { href: '/dashboard/balance', icon: Wallet, labelKey: 'nav.myBalance' },
-  { href: '/dashboard/settings', icon: Settings, labelKey: 'nav.settings' },
-];
+import { brandName, sidebar } from 'virtual:brand';
+import SidebarNav from '@/components/SidebarNav';
 
 export default function DashboardLayout() {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuthStore();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const closeSidebar = () => setSidebarOpen(false);
 
   const toggleLang = () => {
@@ -74,9 +57,8 @@ export default function DashboardLayout() {
               <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
               <circle cx="16" cy="17" r="3" fill="#06b6d4" />
             </svg>
-            RustBill
+            {brandName}
           </Link>
-          {/* Close button (mobile only) */}
           <button
             onClick={closeSidebar}
             className="md:hidden ml-auto p-1 text-mute hover:text-ink bg-transparent border-0 cursor-pointer"
@@ -88,30 +70,14 @@ export default function DashboardLayout() {
 
         {/* Nav items */}
         <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={closeSidebar}
-                className={`flex items-center gap-3 px-3 py-2 text-sm rounded-sm no-underline transition-colors ${
-                  isActive
-                    ? 'text-ink bg-canvas-soft-2 border-l-2 border-l-primary -ml-[2px]'
-                    : 'text-body hover:text-ink hover:bg-canvas-soft-2'
-                }`}
-              >
-                <Icon className="h-4 w-4 shrink-0" />
-                <span>{t(item.labelKey)}</span>
-              </Link>
-            );
-          })}
+          <SidebarNav
+            items={sidebar?.nav ?? []}
+            onNavigate={closeSidebar}
+          />
         </nav>
 
         {/* Bottom section */}
         <div className="p-3 border-t border-hairline space-y-2">
-          {/* Language toggle */}
           <button
             onClick={toggleLang}
             className="w-full flex items-center gap-3 px-3 py-2 text-sm text-body hover:text-ink hover:bg-canvas-soft-2 rounded-sm transition-colors bg-transparent border-0 cursor-pointer"
@@ -120,7 +86,6 @@ export default function DashboardLayout() {
             <span>{i18n.language === 'zh-CN' ? 'English' : '简体中文'}</span>
           </button>
 
-          {/* User info */}
           <div className="flex items-center gap-3 px-3 py-2">
             <Avatar className="h-8 w-8">
               <AvatarFallback className="text-xs">{initials}</AvatarFallback>
@@ -143,9 +108,7 @@ export default function DashboardLayout() {
 
       {/* Main content */}
       <div className="md:ml-60 ml-0 flex-1 flex flex-col min-h-screen">
-        {/* Top bar */}
         <div className="h-16 flex items-center px-4 sm:px-6 border-b border-hairline bg-canvas shrink-0 gap-3">
-          {/* Hamburger (mobile only) */}
           <button
             onClick={() => setSidebarOpen(true)}
             className="md:hidden p-1 text-mute hover:text-ink bg-transparent border-0 cursor-pointer"
