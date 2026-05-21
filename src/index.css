@@ -175,21 +175,3 @@ body {
 .animate-logo-pulse {
   animation: logoPulse 2s ease-in-out infinite;
 }
-
-/* ── Mobile enhancements ── */
-body {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Prevent iOS zoom on input focus */
-@media (max-width: 768px) {
-  input, select, textarea {
-    font-size: 16px !important;
-  }
-}
-
-/* Minimum touch target for interactive elements */
-a, button, [role="button"], input[type="checkbox"], input[type="radio"], select {
-  min-height: 44px;
-  min-width: 44px;
-}

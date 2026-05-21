@@ -78,6 +78,15 @@ export async function loadConfig(): Promise<void> {
   } catch {
     // Use default empty endpoint
   }
+
+  // Preconnect to gRPC backend (cross-origin only)
+  if (grpcEndpoint && !grpcEndpoint.startsWith('/')) {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = grpcEndpoint;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  }
 }
 
 function baseUrl(): string {
