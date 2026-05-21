@@ -10,6 +10,8 @@ import type { MessageDef } from './proto-codec';
 import {
   RegisterRequestDef,
   RegisterResponseDef,
+  SendVerificationCodeRequestDef,
+  SendVerificationCodeResponseDef,
   LoginRequestDef,
   LoginResponseDef,
   RefreshTokenRequestDef,
@@ -243,6 +245,16 @@ export const api = {
       'Register',
       RegisterRequestDef,
       RegisterResponseDef,
+      payload,
+    );
+  },
+
+  sendVerificationCode(payload: Record<string, unknown>) {
+    return grpcCall(
+      'rustbill.identity.IdentityService',
+      'SendVerificationCode',
+      SendVerificationCodeRequestDef,
+      SendVerificationCodeResponseDef,
       payload,
     );
   },

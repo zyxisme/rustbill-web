@@ -1,7 +1,7 @@
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, useEffect, useRef, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AlertCircle, Loader2, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, Loader2, Eye, EyeOff, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,17 +13,21 @@ export default function Register() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, loading: authLoading, error: storeError, register, clearError } = useAuthStore();
+  const { user, loading: authLoading, error: storeError, register, sendVerificationCode, clearError } = useAuthStore();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [sendingCode, setSendingCode] = useState(false);
+  const [countdown, setCountdown] = useState(0);
   const [localError, setLocalError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // If already logged in, redirect to dashboard
   useEffect(() => {
@@ -41,8 +45,54 @@ export default function Register() {
   useEffect(() => {
     return () => {
       clearError();
+      if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [clearError]);
+
+  // Auto-clear localError when fields change
+  useEffect(() => {
+    if (localError) setLocalError(null);
+  }, [username, email, displayName, password, confirmPassword, verificationCode]);
+
+  const startCountdown = (secs: number) => {
+    setCountdown(secs);
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          if (timerRef.current) clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const handleSendCode = async () => {
+    if (!email.trim()) {
+      setLocalError(t('validation.email'));
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setLocalError(t('validation.email'));
+      return;
+    }
+
+    setSendingCode(true);
+    try {
+      const retryAfter = await sendVerificationCode(email.trim());
+      startCountdown(retryAfter);
+      toast({
+        title: t('auth.codeSent'),
+        variant: 'success',
+      });
+    } catch (err) {
+      setLocalError(err instanceof Error ? err.message : t('auth.sendCodeFailed'));
+    } finally {
+      setSendingCode(false);
+    }
+  };
 
   const validate = (): string | null => {
     if (!username.trim()) return t('validation.required');
@@ -54,6 +104,7 @@ export default function Register() {
     if (!password) return t('validation.required');
     if (password.length < 6) return t('auth.passwordTooShort');
     if (password !== confirmPassword) return t('auth.passwordMismatch');
+    if (!verificationCode.trim()) return t('validation.required');
     return null;
   };
 
@@ -69,7 +120,7 @@ export default function Register() {
 
     setSubmitting(true);
     try {
-      await register(username.trim(), email.trim(), displayName.trim(), password);
+      await register(username.trim(), email.trim(), displayName.trim(), password, verificationCode.trim());
       toast({
         title: t('auth.registerSuccess'),
         variant: 'success',
@@ -142,6 +193,43 @@ export default function Register() {
                 autoComplete="email"
                 disabled={isLoading}
               />
+            </div>
+
+            {/* Verification Code */}
+            <div className="space-y-1.5">
+              <Label htmlFor="reg-code">{t('auth.verificationCode')}</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="reg-code"
+                  type="text"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  placeholder={t('auth.verificationCodePlaceholder')}
+                  maxLength={6}
+                  autoComplete="one-time-code"
+                  disabled={isLoading}
+                  className="flex-1"
+                />
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="md"
+                  onClick={handleSendCode}
+                  disabled={isLoading || sendingCode || countdown > 0}
+                  className="whitespace-nowrap"
+                >
+                  {sendingCode ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : countdown > 0 ? (
+                    t('auth.codeSentRetry', { secs: countdown })
+                  ) : (
+                    <>
+                      <Mail className="h-4 w-4" />
+                      {t('auth.sendCode')}
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
 
             {/* Display Name */}

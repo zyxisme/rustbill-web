@@ -25,7 +25,8 @@ interface AuthState {
   error: string | null;
   init: () => Promise<void>;
   login: (username: string, password: string) => Promise<void>;
-  register: (username: string, email: string, displayName: string, password: string) => Promise<void>;
+  register: (username: string, email: string, displayName: string, password: string, verificationCode: string) => Promise<void>;
+  sendVerificationCode: (email: string) => Promise<number>;
   logout: () => Promise<void>;
   clearError: () => void;
 }
@@ -116,10 +117,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
 
-  register: async (username: string, email: string, displayName: string, password: string) => {
+  register: async (username: string, email: string, displayName: string, password: string, verificationCode: string) => {
     set({ loading: true, error: null });
     try {
-      const resp = (await api.register({ username, email, displayName, password })) as Record<string, unknown>;
+      const resp = (await api.register({ username, email, displayName, password, verificationCode })) as Record<string, unknown>;
       if (resp.accessToken) {
         const accessToken = resp.accessToken as string;
         const refreshTokenVal = resp.refreshToken as string | undefined;
@@ -136,6 +137,18 @@ export const useAuthStore = create<AuthState>((set) => ({
       }
     } catch (err) {
       set({ loading: false, error: extractMessage(err) });
+      throw err;
+    }
+  },
+
+  sendVerificationCode: async (email: string) => {
+    try {
+      const resp = (await api.sendVerificationCode({ email, purpose: 'registration' })) as Record<string, unknown>;
+      if (resp.sent) {
+        return (resp.retryAfterSecs as number) || 60;
+      }
+      throw new Error((resp.message as string) || 'Failed to send verification code');
+    } catch (err) {
       throw err;
     }
   },

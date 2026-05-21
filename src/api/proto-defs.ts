@@ -51,6 +51,21 @@ export const RegisterRequestDef: MessageDef = {
   ],
 };
 
+export const SendVerificationCodeRequestDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'email', type: 'string' },
+    { no: 2, name: 'purpose', type: 'string' },
+  ],
+};
+
+export const SendVerificationCodeResponseDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'sent', type: 'bool' },
+    { no: 2, name: 'message', type: 'string' },
+    { no: 3, name: 'retryAfterSecs', type: 'int32' },
+  ],
+};
+
 export const RegisterResponseDef: MessageDef = {
   fields: [
     { no: 1, name: 'user', type: 'message', message: UserInfoDef },

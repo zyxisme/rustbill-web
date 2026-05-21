@@ -578,7 +578,16 @@
     "terms": "服务条款",
     "privacy": "隐私政策",
     "contact": "联系我们",
-    "about": "关于我们"
+    "about": "关于我们",
+    "product": "产品",
+    "pricing": "价格",
+    "api": "API",
+    "support": "支持",
+    "docs": "文档",
+    "faq": "常见问题",
+    "company": "公司",
+    "tagline": "现代化云服务分销平台。",
+    "rights": "保留所有权利。"
   },
   "pagination": {
     "showing": "显示第 {{from}} 到 {{to}} 条，共 {{total}} 条",
