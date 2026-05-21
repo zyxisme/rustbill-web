@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { switchLanguage } from '@/i18n';
 import {
   ChevronLeft,
   LogOut,
@@ -23,7 +24,7 @@ export default function DashboardLayout() {
 
   const toggleLang = () => {
     const next = i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN';
-    i18n.changeLanguage(next);
+    switchLanguage(next);
   };
 
   const handleLogout = async () => {

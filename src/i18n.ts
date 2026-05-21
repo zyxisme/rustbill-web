@@ -30,14 +30,15 @@ const activeLng = resolveLng();
 export const i18nReady = (async () => {
   const mod = await import(`@/locales/${activeLng}/translation.json`);
   i18n.addResourceBundle(activeLng, 'translation', mod.default);
-
-  // Background preload the other language (not on critical path)
-  const other = activeLng === 'zh-CN' ? 'en-US' : 'zh-CN';
-  import(`@/locales/${other}/translation.json`)
-    .then((m) => i18n.addResourceBundle(other, 'translation', m.default))
-    .catch(() => {});
-
   return i18n;
 })();
+
+export async function switchLanguage(lng: 'zh-CN' | 'en-US') {
+  if (!i18n.hasResourceBundle(lng, 'translation')) {
+    const mod = await import(`@/locales/${lng}/translation.json`);
+    i18n.addResourceBundle(lng, 'translation', mod.default);
+  }
+  await i18n.changeLanguage(lng);
+}
 
 export default i18n;
