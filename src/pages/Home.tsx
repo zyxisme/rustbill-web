@@ -109,7 +109,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FEATURES (6-up)
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas border-t border-hairline">
+      <section id="features" className="bg-canvas border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Features"
@@ -136,7 +136,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           GLOBAL INFRASTRUCTURE
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas-soft border-t border-hairline">
+      <section id="infrastructure" className="bg-canvas-soft border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Infrastructure"
@@ -152,7 +152,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           HOW IT WORKS
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas border-t border-hairline">
+      <section id="how-it-works" className="bg-canvas border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="How It Works"
@@ -190,7 +190,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           PERFORMANCE
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas-soft border-t border-hairline">
+      <section id="performance" className="bg-canvas-soft border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Performance"
@@ -220,7 +220,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           PRODUCT CATEGORIES
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas border-t border-hairline">
+      <section id="products" className="bg-canvas border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Products"
@@ -251,7 +251,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           TERMINAL / SHOWCASE
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas-soft border-t border-hairline">
+      <section id="showcase" className="bg-canvas-soft border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -276,7 +276,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           PRICING
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas border-t border-hairline">
+      <section id="pricing" className="bg-canvas border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Pricing"
@@ -359,7 +359,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           TESTIMONIALS
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas-soft border-t border-hairline">
+      <section id="testimonials" className="bg-canvas-soft border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="Testimonials"
@@ -397,7 +397,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FAQ
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-canvas border-t border-hairline">
+      <section id="faq" className="bg-canvas border-t border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-24">
           <SectionHeader
             eyebrow="FAQ"

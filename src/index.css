@@ -116,6 +116,11 @@ body {
   }
 }
 
+/* ── Anchor offset for sticky header ── */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
