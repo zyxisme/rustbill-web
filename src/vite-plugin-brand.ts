@@ -268,13 +268,10 @@ export default function vitePluginBrand(): Plugin {
       }
     },
 
-    transformIndexHtml(html: string): string {
+    transformIndexHtml(html: string) {
       const config = loadBrandConfig(rootDir);
       const colors = deriveColors(config.accent, config.colors);
       const css = generateCSS(colors);
-
-      // Inject CSS variables before </head>
-      html = html.replace('</head>', `  <style id="rustbill-brand">\n${css}  </style>\n</head>`);
 
       // Replace title
       html = html.replace(/<title>.*?<\/title>/, `<title>${config.brandName}</title>`);
@@ -284,7 +281,17 @@ export default function vitePluginBrand(): Plugin {
         html = html.replace(/<link rel="icon"[^>]*>/, `<link rel="icon" type="image/svg+xml" href="${config.favicon}" />`);
       }
 
-      return html;
+      return {
+        html,
+        tags: [
+          {
+            tag: 'style',
+            attrs: { id: 'rustbill-brand' },
+            children: css,
+            injectTo: 'head' as const,
+          },
+        ],
+      };
     },
 
     handleHotUpdate({ file, server }) {
