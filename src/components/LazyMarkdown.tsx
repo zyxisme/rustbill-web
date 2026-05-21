@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 
 const ReactMarkdown = React.lazy(() => import('react-markdown'));
 
