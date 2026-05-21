@@ -6,9 +6,8 @@ import PublicLayout from '@/layouts/PublicLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PageLoader from '@/components/PageLoader';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import HomeHero from '@/components/HomeHero';
 import { Toaster } from '@/hooks/use-toast';
-
-const HomeHero = React.lazy(() => import('@/components/HomeHero'));
 
 const Home = React.lazy(() => import('@/pages/Home'));
 const Catalog = React.lazy(() => import('@/pages/Catalog'));
@@ -55,10 +54,12 @@ export default function App() {
           {/* Public pages */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={
-              <Suspense fallback={<PageLoader variant="public" />}>
+              <>
                 <HomeHero />
-                <Home />
-              </Suspense>
+                <Suspense fallback={<PageLoader variant="public" />}>
+                  <Home />
+                </Suspense>
+              </>
             } />
             <Route path="/catalog" element={<Suspense fallback={<PageLoader variant="public" />}><Catalog /></Suspense>} />
             <Route path="/catalog/:id" element={<Suspense fallback={<PageLoader variant="public" />}><ProductDetail /></Suspense>} />
