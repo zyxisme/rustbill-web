@@ -79,6 +79,12 @@ header:
       children:
         - i18n: "nav.catalog"
           href: "/catalog"
+    - i18n: "nav.legal"
+      children:
+        - i18n: "nav.terms"
+          href: "/legal/terms"
+        - i18n: "nav.privacy"
+          href: "/legal/privacy"
 
 # ─── Dashboard 侧边栏导航 ───
 sidebar:

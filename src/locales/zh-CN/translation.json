@@ -15,7 +15,10 @@
     "settings": "账户设置",
     "logout": "退出登录",
     "backHome": "返回首页",
-    "gotoAdmin": "管理后台"
+    "gotoAdmin": "管理后台",
+    "legal": "法律条款",
+    "terms": "用户协议",
+    "privacy": "隐私政策"
   },
   "common": {
     "save": "保存",

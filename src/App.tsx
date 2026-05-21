@@ -25,6 +25,8 @@ const MyTickets = React.lazy(() => import('@/pages/dashboard/MyTickets'));
 const TicketDetail = React.lazy(() => import('@/pages/dashboard/TicketDetail'));
 const MyBalance = React.lazy(() => import('@/pages/dashboard/MyBalance'));
 const Settings = React.lazy(() => import('@/pages/dashboard/Settings'));
+const Terms = React.lazy(() => import('@/pages/legal/Terms'));
+const Privacy = React.lazy(() => import('@/pages/legal/Privacy'));
 
 function AppInit({ children }: { children: React.ReactNode }) {
   const init = useAuthStore((s) => s.init);
@@ -62,6 +64,8 @@ export default function App() {
             <Route path="/catalog/:id" element={<Suspense fallback={<PageLoader variant="public" />}><ProductDetail /></Suspense>} />
             <Route path="/login" element={<Suspense fallback={<PageLoader variant="public" />}><Login /></Suspense>} />
             <Route path="/register" element={<Suspense fallback={<PageLoader variant="public" />}><Register /></Suspense>} />
+            <Route path="/legal/terms" element={<Suspense fallback={<PageLoader variant="public" />}><Terms /></Suspense>} />
+            <Route path="/legal/privacy" element={<Suspense fallback={<PageLoader variant="public" />}><Privacy /></Suspense>} />
           </Route>
 
           {/* Dashboard pages */}

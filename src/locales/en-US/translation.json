@@ -15,7 +15,10 @@
     "settings": "Settings",
     "logout": "Sign Out",
     "backHome": "Back to Home",
-    "gotoAdmin": "Admin Panel"
+    "gotoAdmin": "Admin Panel",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
   },
   "common": {
     "save": "Save",

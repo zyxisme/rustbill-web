@@ -165,7 +165,8 @@ export default function PublicLayout() {
             <div className="space-y-2">
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.about')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.contact')}</a>
-              <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.privacy')}</a>
+              <Link to="/legal/terms" className="block text-sm text-body hover:text-link no-underline">{t('footer.terms')}</Link>
+              <Link to="/legal/privacy" className="block text-sm text-body hover:text-link no-underline">{t('footer.privacy')}</Link>
             </div>
           </div>
           <div>
