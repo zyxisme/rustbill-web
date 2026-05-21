@@ -4,7 +4,7 @@ import { switchLanguage } from '@/i18n';
 import { Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { brandName, logo, tagline, header } from 'virtual:brand';
 import NavMenu from '@/components/NavMenu';
 
@@ -25,9 +25,27 @@ export default function PublicLayout() {
   const { t, i18n } = useTranslation();
   const { user } = useAuthStore();
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuState, setMenuState] = useState<'closed' | 'open' | 'closing'>('closed');
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  const closeMenu = () => {
+    setMenuState('closing');
+    clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => setMenuState('closed'), 200);
+  };
+  const openMenu = () => {
+    clearTimeout(closeTimerRef.current);
+    setMenuState('open');
+  };
+
+  useEffect(() => {
+    if (menuState === 'open') closeMenu();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
+  useEffect(() => {
+    return () => clearTimeout(closeTimerRef.current);
+  }, []);
 
   const isDashboard = location.pathname.startsWith('/dashboard');
   const navItems = header?.nav ?? [
@@ -95,16 +113,20 @@ export default function PublicLayout() {
 
           {/* Mobile menu button */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => menuState === 'open' ? closeMenu() : openMenu()}
             className="md:hidden text-ink bg-transparent border-0 p-1 cursor-pointer"
           >
-            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {menuState === 'open' ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile menu */}
-        {menuOpen && (
-          <div className="md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3 animate-in slide-in-from-top-2 fade-in-0 duration-200">
+        {menuState !== 'closed' && (
+          <div className={`md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3 duration-200 ${
+            menuState === 'open'
+              ? 'animate-in slide-in-from-top-2 fade-in-0'
+              : 'animate-out slide-out-to-top-2 fade-out-0'
+          }`}>
             <NavMenu items={navItems} mobile />
             <div className="pt-2 border-t border-hairline">
               <button
@@ -118,19 +140,19 @@ export default function PublicLayout() {
             <div className="pt-2 border-t border-hairline flex items-center gap-2">
               {user ? (
                 <>
-                  <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="no-underline flex-1">
+                  <Link to="/dashboard" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="primary" size="sm" className="w-full">{t('nav.dashboard')}</Button>
                   </Link>
-                  <Button variant="secondary" size="sm" onClick={() => { useAuthStore.getState().logout(); setMenuOpen(false); }}>
+                  <Button variant="secondary" size="sm" onClick={() => { useAuthStore.getState().logout(); closeMenu(); }}>
                     {t('nav.logout')}
                   </Button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" onClick={() => setMenuOpen(false)} className="no-underline flex-1">
+                  <Link to="/login" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="secondary" size="sm" className="w-full">{t('nav.login')}</Button>
                   </Link>
-                  <Link to="/register" onClick={() => setMenuOpen(false)} className="no-underline flex-1">
+                  <Link to="/register" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="primary" size="sm" className="w-full">{t('nav.register')}</Button>
                   </Link>
                 </>
