@@ -58,7 +58,7 @@ export default function LazyWorldMap() {
       if (cancelled) return;
       const DottedMap = mod.default;
 
-      const map = new DottedMap({ height: 60, grid: 'diagonal' });
+      const map = new DottedMap({ height: 35, grid: 'diagonal' });
 
       for (const c of clusters) {
         map.addPin({
@@ -70,7 +70,7 @@ export default function LazyWorldMap() {
       }
 
       const svg = map.getSVG({
-        radius: 0.25,
+        radius: 0.3,
         color: '#4b5563',
         shape: 'circle',
         backgroundColor: '#11161e',
