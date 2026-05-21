@@ -16,8 +16,6 @@ logo:
       <circle cx="16" cy="17" r="3" fill="#06b6d4" />
     </svg>
 
-favicon: "/favicon.svg"
-
 # ─── 全量颜色 (当前 Dark-Cyan-Design 值) ───
 colors:
   # Surface ladder

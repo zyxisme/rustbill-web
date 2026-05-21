@@ -239,6 +239,20 @@ function generateCSS(colors: Record<string, string>): string {
 
 // ─── Virtual Module Codegen ───
 
+function getDerivedFavicon(config: BrandConfig): string | null {
+  if (config.favicon != null) return config.favicon;
+  if (config.logo) {
+    if (config.logo.type === 'svg' && config.logo.svg) {
+      const b64 = Buffer.from(config.logo.svg.trim()).toString('base64');
+      return `data:image/svg+xml;base64,${b64}`;
+    }
+    if (config.logo.type === 'url' && config.logo.url) {
+      return config.logo.url;
+    }
+  }
+  return '/favicon.svg';
+}
+
 function generateVirtualModule(config: BrandConfig): string {
   const colors = deriveColors(config.accent, config.colors);
 
@@ -247,7 +261,7 @@ function generateVirtualModule(config: BrandConfig): string {
     `export const tagline = ${JSON.stringify(config.tagline ?? '')};`,
     `export const accent = ${JSON.stringify(config.accent)};`,
     `export const logo = ${JSON.stringify(config.logo ?? null)};`,
-    `export const favicon = ${JSON.stringify(config.favicon ?? '/favicon.svg')};`,
+    `export const favicon = ${JSON.stringify(getDerivedFavicon(config))};`,
     `export const colors = ${JSON.stringify(colors)};`,
     `export const header = ${JSON.stringify(config.header ?? null)};`,
     `export const sidebar = ${JSON.stringify(config.sidebar ?? null)};`,
@@ -292,8 +306,9 @@ export default function vitePluginBrand(): Plugin {
       html = html.replace(/<title>.*?<\/title>/, `<title>${config.brandName}</title>`);
 
       // Replace favicon
-      if (config.favicon) {
-        html = html.replace(/<link rel="icon"[^>]*>/, `<link rel="icon" type="image/svg+xml" href="${config.favicon}" />`);
+      const deriveFavicon = getDerivedFavicon(config);
+      if (deriveFavicon) {
+        html = html.replace(/<link rel="icon"[^>]*>/, `<link rel="icon" type="image/svg+xml" href="${deriveFavicon}" />`);
       }
 
       return {
