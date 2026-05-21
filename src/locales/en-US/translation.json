@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "products": "Products",
     "catalog": "Catalog",
     "login": "Sign In",
     "register": "Sign Up",

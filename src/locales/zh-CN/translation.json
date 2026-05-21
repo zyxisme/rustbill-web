@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "首页",
-    "catalog": "产品",
+    "products": "产品",
+    "catalog": "全部产品",
     "login": "登录",
     "register": "注册",
     "dashboard": "控制台",

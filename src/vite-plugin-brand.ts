@@ -182,7 +182,9 @@ const DEFAULT_BRAND: BrandConfig = {
   header: {
     nav: [
       { i18n: 'nav.home', href: '/' },
-      { i18n: 'nav.catalog', href: '/catalog' },
+      { i18n: 'nav.products', children: [
+        { i18n: 'nav.catalog', href: '/catalog' },
+      ] },
     ],
   },
   sidebar: {
