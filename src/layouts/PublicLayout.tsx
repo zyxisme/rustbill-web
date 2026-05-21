@@ -4,7 +4,7 @@ import { switchLanguage } from '@/i18n';
 import { Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { brandName, logo, tagline, header } from 'virtual:brand';
 import NavMenu from '@/components/NavMenu';
 
@@ -26,6 +26,8 @@ export default function PublicLayout() {
   const { user } = useAuthStore();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
   const isDashboard = location.pathname.startsWith('/dashboard');
   const navItems = header?.nav ?? [
