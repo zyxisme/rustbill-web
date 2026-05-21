@@ -38,7 +38,7 @@ export default function DashboardLayout() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          className="fixed inset-0 z-40 bg-black/60 md:hidden animate-in fade-in-0 duration-200"
           onClick={closeSidebar}
         />
       )}
@@ -46,8 +46,8 @@ export default function DashboardLayout() {
       {/* Sidebar */}
       <aside
         className={`fixed left-0 top-0 z-50 h-screen w-60 bg-canvas-soft border-r border-hairline flex flex-col transition-transform duration-200 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 md:z-40`}
+          sidebarOpen ? 'translate-x-0 animate-in slide-in-from-left-4 fade-in-0 duration-200' : '-translate-x-full'
+        } md:translate-x-0 md:z-40 md:animate-none`}
       >
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-5 border-b border-hairline shrink-0">
