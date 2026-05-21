@@ -194,11 +194,11 @@ function loadBrandConfig(rootDir: string): BrandConfig {
     const parsed = YAML.parse(raw);
     if (!parsed || typeof parsed !== 'object') return DEFAULT_BRAND;
     return {
-      brandName: parsed.brandName || DEFAULT_BRAND.brandName,
+      brandName: parsed.brandName ?? DEFAULT_BRAND.brandName,
       tagline: parsed.tagline ?? DEFAULT_BRAND.tagline,
-      accent: parsed.accent || DEFAULT_BRAND.accent,
-      logo: parsed.logo || undefined,
-      favicon: parsed.favicon || undefined,
+      accent: parsed.accent ?? DEFAULT_BRAND.accent,
+      logo: parsed.logo ?? undefined,
+      favicon: parsed.favicon ?? undefined,
       colors: parsed.colors || undefined,
       header: parsed.header || DEFAULT_BRAND.header,
       sidebar: parsed.sidebar || DEFAULT_BRAND.sidebar,
