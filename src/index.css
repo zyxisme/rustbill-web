@@ -57,7 +57,7 @@
 
   /* ── Typography ── */
   --font-sans: "HarmonyOS Sans SC", "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  --font-mono: "HarmonyOS Sans SC", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
   /* ── Radius ── */
   --radius-none: 0px;
