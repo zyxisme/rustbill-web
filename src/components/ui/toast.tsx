@@ -21,8 +21,8 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       <div
         ref={ref}
         className={cn(
-          "relative w-80 rounded-lg border border-hairline bg-canvas-soft p-4 shadow-[0_0_40px_rgba(6,182,212,0.06)]",
-          "animate-[toastSlideIn_0.3s_ease-out]",
+          "relative w-80 rounded-lg border border-hairline bg-canvas-soft p-4 shadow-[0_0_40px_rgba(6,182,212,0.06)] hover:shadow-[0_0_40px_rgba(6,182,212,0.12)] transition-shadow",
+          "animate-[toastSlideIn_0.3s_ease-out] data-[closed]:animate-[toastSlideOut_0.25s_ease-in]",
           variantStyles[variant],
           className,
         )}

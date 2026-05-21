@@ -63,7 +63,7 @@ export function LazyTerminal() {
           </div>
         </div>
       ) : (
-        <div className="bg-canvas rounded-md border border-hairline h-48 animate-pulse" />
+        <div className="bg-canvas rounded-md border border-hairline h-48 animate-shimmer" />
       )}
     </div>
   );
