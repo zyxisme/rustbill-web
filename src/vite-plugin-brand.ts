@@ -92,6 +92,9 @@ function hslToHex(hsl: HSL): string {
 // ─── Color Derivation ───
 
 function deriveColors(accent: string, overrides?: Record<string, string>): Record<string, string> {
+  if (!/^#[0-9a-fA-F]{6}$/.test(accent)) {
+    throw new Error(`brand.yaml: accent "${accent}" is not a valid #RRGGBB hex color`);
+  }
   const base = hexToHsl(accent);
 
   const derived: Record<string, string> = {
@@ -203,7 +206,8 @@ function loadBrandConfig(rootDir: string): BrandConfig {
       header: parsed.header || DEFAULT_BRAND.header,
       sidebar: parsed.sidebar || DEFAULT_BRAND.sidebar,
     };
-  } catch {
+  } catch (err) {
+    console.warn(`[vite-plugin-brand] Failed to load ${yamlPath}:`, err instanceof Error ? err.message : err);
     return DEFAULT_BRAND;
   }
 }
@@ -229,7 +233,7 @@ function generateVirtualModule(config: BrandConfig): string {
     `export const tagline = ${JSON.stringify(config.tagline ?? '')};`,
     `export const accent = ${JSON.stringify(config.accent)};`,
     `export const logo = ${JSON.stringify(config.logo ?? null)};`,
-    `export const favicon = ${JSON.stringify(config.favicon ?? './public/favicon.svg')};`,
+    `export const favicon = ${JSON.stringify(config.favicon ?? '/favicon.svg')};`,
     `export const colors = ${JSON.stringify(colors)};`,
     `export const header = ${JSON.stringify(config.header ?? null)};`,
     `export const sidebar = ${JSON.stringify(config.sidebar ?? null)};`,
