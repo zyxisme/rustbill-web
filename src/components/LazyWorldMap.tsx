@@ -70,10 +70,10 @@ export default function LazyWorldMap() {
       }
 
       const svg = map.getSVG({
-        radius: 0.2,
-        color: '#1f2937',
+        radius: 0.25,
+        color: '#4b5563',
         shape: 'circle',
-        backgroundColor: 'transparent',
+        backgroundColor: '#11161e',
       });
 
       // Extract viewBox dimensions
