@@ -4,71 +4,16 @@
 
 brandName: "RustBill"
 tagline: "高性能云计算平台"
-accent: "#06b6d4"
+accent: "#00d1a7"
 
 logo:
   type: "svg"
-  # 注意：内联 SVG 含硬编码颜色。修改 accent 后需手动更新 SVG 中的 fill/stroke 色值。
   svg: |
     <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="32" height="32" rx="6" fill="#090c10" />
-      <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
-      <circle cx="16" cy="17" r="3" fill="#06b6d4" />
+      <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#00d1a7" strokeWidth="1.5" fill="none" />
+      <circle cx="16" cy="17" r="3" fill="#00d1a7" />
     </svg>
-
-# ─── 全量颜色 (当前 Dark-Cyan-Design 值) ───
-colors:
-  # Surface ladder
-  canvas:         "#090c10"
-  canvas-soft:    "#11161e"
-  canvas-soft-2:  "#1a1f2e"
-
-  # Brand accent
-  primary:            "#06b6d4"
-  primary-hover:      "#0891b2"
-  primary-foreground: "#021a1f"
-
-  # Text
-  ink:  "#e1e6eb"
-  body: "#9ca3af"
-  mute: "#6b7280"
-
-  # Borders
-  hairline:        "#1f2937"
-  hairline-strong: "#374151"
-
-  # Links
-  link:         "#22d3ee"
-  link-deep:    "#0891b2"
-  link-bg-soft: "#0f2d3a"
-
-  # Semantic
-  success:      "#22d3ee"
-  error:        "#ef4444"
-  error-soft:   "#3b121a"
-  error-deep:   "#b91c1c"
-  warning:      "#f59e0b"
-  warning-soft: "#2d1f0a"
-  warning-deep: "#b45309"
-  violet:       "#8b5cf6"
-  violet-soft:  "#1e1738"
-  violet-deep:  "#6d28d9"
-
-  # Cyan scale
-  cyan:            "#06b6d4"
-  cyan-soft:       "#0f2d3a"
-  cyan-deep:       "#0891b2"
-  highlight-cyan:  "#22d3ee"
-  highlight-teal:  "#2dd4bf"
-
-  # Gradient
-  gradient-start: "#06b6d4"
-  gradient-mid:   "#0891b2"
-  gradient-end:   "#0e7490"
-
-  # Selection
-  selection-bg: "#06b6d4"
-  selection-fg: "#021a1f"
 
 # ─── 顶栏导航 (不填则用硬编码默认) ───
 header:

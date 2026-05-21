@@ -177,7 +177,7 @@ function deriveColors(accent: string, overrides?: Record<string, string>): Recor
 
 const DEFAULT_BRAND: BrandConfig = {
   brandName: 'RustBill',
-  accent: '#06b6d4',
+  accent: '#00d1a7',
   tagline: '高性能云计算平台',
   header: {
     nav: [

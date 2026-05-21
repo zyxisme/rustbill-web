@@ -11,8 +11,8 @@ export default function PageLoader({ variant = 'public' }: PageLoaderProps) {
       <div className="animate-logo-pulse rounded-sm">
         <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="32" height="32" rx="6" fill="#090c10" />
-          <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
-          <circle cx="16" cy="17" r="3" fill="#06b6d4" />
+          <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#00d1a7" strokeWidth="1.5" fill="none" />
+          <circle cx="16" cy="17" r="3" fill="#00d1a7" />
         </svg>
       </div>
 

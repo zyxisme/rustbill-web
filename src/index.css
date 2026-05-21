@@ -4,56 +4,56 @@
 
 @theme {
   /* ── Surface ladder ── */
-  --color-canvas: #090c10;
-  --color-canvas-soft: #11161e;
-  --color-canvas-soft-2: #1a1f2e;
+  --color-canvas: #0e1b18;
+  --color-canvas-soft: #152824;
+  --color-canvas-soft-2: #203c36;
 
   /* ── Brand accent ── */
-  --color-primary: #06b6d4;
-  --color-primary-hover: #0891b2;
-  --color-primary-foreground: #021a1f;
+  --color-primary: #00d1a7;
+  --color-primary-hover: #009e7e;
+  --color-primary-foreground: #061815;
 
   /* ── Text ── */
-  --color-ink: #e1e6eb;
-  --color-body: #9ca3af;
-  --color-mute: #6b7280;
+  --color-ink: #eaeceb;
+  --color-body: #a1aaa8;
+  --color-mute: #6d7876;
 
   /* ── Borders ── */
-  --color-hairline: #1f2937;
-  --color-hairline-strong: #374151;
+  --color-hairline: #1c2120;
+  --color-hairline-strong: #2f3735;
 
   /* ── Links ── */
-  --color-link: #22d3ee;
-  --color-link-deep: #0891b2;
-  --color-link-bg-soft: #0f2d3a;
+  --color-link: #0fffcf;
+  --color-link-deep: #009e7e;
+  --color-link-bg-soft: #133932;
 
   /* ── Semantic ── */
-  --color-success: #22d3ee;
+  --color-success: #0537ff;
   --color-error: #ef4444;
   --color-error-soft: #3b121a;
   --color-error-deep: #b91c1c;
   --color-warning: #f59e0b;
   --color-warning-soft: #2d1f0a;
   --color-warning-deep: #b45309;
-  --color-violet: #8b5cf6;
-  --color-violet-soft: #1e1738;
-  --color-violet-deep: #6d28d9;
+  --color-violet: #b715bc;
+  --color-violet-soft: #2a122b;
+  --color-violet-deep: #931197;
 
   /* ── Cyan scale ── */
-  --color-cyan: #06b6d4;
-  --color-cyan-soft: #0f2d3a;
-  --color-cyan-deep: #0891b2;
-  --color-highlight-cyan: #22d3ee;
-  --color-highlight-teal: #2dd4bf;
+  --color-cyan: #00d1a7;
+  --color-cyan-soft: #133932;
+  --color-cyan-deep: #009e7e;
+  --color-highlight-cyan: #0fffcf;
+  --color-highlight-teal: #05deff;
 
   /* ── Gradient ── */
-  --color-gradient-start: #06b6d4;
-  --color-gradient-mid: #0891b2;
-  --color-gradient-end: #0e7490;
+  --color-gradient-start: #00d1a7;
+  --color-gradient-mid: #009e7e;
+  --color-gradient-end: #006b56;
 
   /* ── Selection ── */
-  --color-selection-bg: #06b6d4;
-  --color-selection-fg: #021a1f;
+  --color-selection-bg: #00d1a7;
+  --color-selection-fg: #061815;
 
   /* ── Typography ── */
   --font-sans: "HarmonyOS Sans SC", "Inter", system-ui, -apple-system, sans-serif;
