@@ -103,6 +103,15 @@ export default function PublicLayout() {
         {menuOpen && (
           <div className="md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3">
             <NavMenu items={navItems} mobile />
+            <div className="pt-2 border-t border-hairline">
+              <button
+                onClick={toggleLang}
+                className="flex items-center gap-2 text-body text-sm hover:text-ink transition-colors bg-transparent border-0 cursor-pointer py-1"
+              >
+                <Globe className="h-4 w-4" />
+                <span>{i18n.language === 'zh-CN' ? 'English' : '简体中文'}</span>
+              </button>
+            </div>
             <div className="pt-2 border-t border-hairline flex items-center gap-2">
               {user ? (
                 <>
