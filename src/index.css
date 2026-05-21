@@ -144,6 +144,38 @@ body {
   }
 }
 
+/* ── Brand shimmer ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(6,182,212,0.3); }
+  50% { box-shadow: 0 0 24px rgba(6,182,212,0.6); }
+}
+
+@keyframes progressIndeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+@keyframes toastSlideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+/* ── Utility ── */
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-logo-pulse {
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
 /* ── Mobile enhancements ── */
 body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
