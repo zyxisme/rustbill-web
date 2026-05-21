@@ -31,6 +31,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotted-map": "^3.1.0",
+    "harmonyos-sans-webfont-splitted": "^1.2.1",
     "i18next": "^26.2.0",
     "i18next-browser-languagedetector": "^8.2.1",
     "lucide-react": "^1.16.0",

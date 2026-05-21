@@ -36,6 +36,8 @@ interface BrandConfig {
   clusters: Cluster[];
 }
 
+declare module 'harmonyos-sans-webfont-splitted';
+
 declare module 'virtual:brand' {
   export const brandName: string;
   export const tagline: string;
