@@ -5,6 +5,7 @@ import { brandName } from 'virtual:brand';
 import PublicLayout from '@/layouts/PublicLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PageLoader from '@/components/PageLoader';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { Toaster } from '@/hooks/use-toast';
 
 const Home = React.lazy(() => import('@/pages/Home'));
@@ -45,6 +46,7 @@ export default function App() {
     <BrowserRouter>
       <AppTitle />
       <AppInit>
+        <ErrorBoundary>
         <Routes>
           {/* Public pages */}
           <Route element={<PublicLayout />}>
@@ -69,6 +71,7 @@ export default function App() {
             <Route path="/dashboard/settings" element={<Suspense fallback={<PageLoader variant="dashboard" />}><Settings /></Suspense>} />
           </Route>
         </Routes>
+        </ErrorBoundary>
       </AppInit>
       <Toaster />
     </BrowserRouter>
