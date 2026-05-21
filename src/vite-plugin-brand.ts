@@ -133,7 +133,7 @@ function deriveColors(accent: string, overrides?: Record<string, string>): Recor
     'link-bg-soft': hslToHex({ h: base.h, s: Math.round(base.s * 0.5), l: 15 }),
 
     // Semantic — hue rotated
-    success: hslToHex({ h: (base.h + 60) % 360, s: base.s, l: Math.min(95, base.l + 10) }),
+    success: hslToHex({ h: (base.h + 30) % 360, s: base.s, l: Math.min(95, base.l + 10) }),
     error: '#ef4444',
     'error-soft': '#3b121a',
     'error-deep': '#b91c1c',

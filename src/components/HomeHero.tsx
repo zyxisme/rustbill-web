@@ -15,7 +15,7 @@ export default function HomeHero() {
       <div className="relative mx-auto max-w-[1400px] px-6 pt-28 pb-16 flex flex-col items-center text-center">
         {/* Eyebrow */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft/60 backdrop-blur-sm text-xs font-mono text-mute uppercase tracking-wider mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
           {t('home.eyebrow')}
         </div>
 

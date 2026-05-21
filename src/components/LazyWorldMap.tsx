@@ -161,7 +161,7 @@ export default function LazyWorldMap() {
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-canvas-soft border border-hairline rounded-lg px-3 py-2 text-xs shadow-lg pointer-events-none whitespace-nowrap z-10">
                     <div className="text-ink font-medium text-sm">{cluster.name}</div>
                     <div className="text-mute mt-0.5">
-                      <span className="text-primary font-mono">{cluster.latency}</span>
+                      <span className="text-success font-mono">{cluster.latency}</span>
                       {' · '}
                       {cluster.zones} AZ
                     </div>
