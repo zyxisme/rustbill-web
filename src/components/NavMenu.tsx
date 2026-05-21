@@ -42,7 +42,7 @@ function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
       className={cn(
         'text-sm leading-none no-underline transition-colors',
         mobile
-          ? 'flex items-center justify-center py-1'
+          ? 'flex items-center py-1'
           : 'inline-flex items-center justify-center px-3 h-8 rounded-full',
         isActive
           ? 'text-ink bg-canvas-soft'
@@ -83,10 +83,10 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
       <div>
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-center gap-1 w-full py-1 text-sm leading-none text-mute bg-transparent border-0 cursor-pointer"
+          className="flex items-center justify-between w-full py-1 text-sm leading-none text-mute bg-transparent border-0 cursor-pointer"
         >
           {label}
-          <ChevronDown className={cn('h-3 w-3 transition-transform', open && 'rotate-180')} />
+          <ChevronDown className={cn('h-3 w-3 transition-transform ml-2', open && 'rotate-180')} />
         </button>
         {open && (
           <div className="ml-3 space-y-1 mt-1">
@@ -94,7 +94,7 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
               <Link
                 key={child.i18n || child.label}
                 to={child.href || '#'}
-                className="block py-1 text-sm text-center text-body hover:text-ink no-underline transition-colors"
+                className="block py-1 text-sm text-body hover:text-ink no-underline transition-colors"
               >
                 {navLabel(t, child)}
               </Link>
