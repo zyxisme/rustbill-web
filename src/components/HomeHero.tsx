@@ -9,7 +9,7 @@ export default function HomeHero() {
   return (
     <section className="relative overflow-hidden bg-canvas">
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 60% 50% at 50% -10%, rgba(6,182,212,0.15), transparent 55%), radial-gradient(ellipse 30% 60% at 85% 90%, rgba(8,145,178,0.08), transparent 45%)',
+        background: 'radial-gradient(ellipse 60% 50% at 50% -10%, rgba(0,209,167,0.15), transparent 55%), radial-gradient(ellipse 30% 60% at 85% 90%, rgba(0,158,126,0.08), transparent 45%)',
       }} />
 
       <div className="relative mx-auto max-w-[1400px] px-6 pt-28 pb-16 flex flex-col items-center text-center">

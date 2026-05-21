@@ -291,7 +291,7 @@ export default function Catalog() {
                 return (
                   <Card
                     key={product.id}
-                    className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_40px_rgba(6,182,212,0.06)] transition-shadow"
+                    className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_40px_rgba(0,209,167,0.06)] transition-shadow"
                   >
                     <CardContent className="p-0 flex flex-col h-full">
                       {/* Name */}

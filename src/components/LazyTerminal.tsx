@@ -23,7 +23,7 @@ export function LazyTerminal() {
   return (
     <div ref={ref} className="min-h-[12rem]">
       {visible ? (
-        <div className="bg-canvas rounded-md border border-hairline overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.06)]">
+        <div className="bg-canvas rounded-md border border-hairline overflow-hidden shadow-[0_0_30px_rgba(0,209,167,0.06)]">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-hairline bg-canvas-soft-2">
             <span className="w-3 h-3 rounded-full bg-error/80" />
             <span className="w-3 h-3 rounded-full bg-warning/80" />

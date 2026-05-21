@@ -120,7 +120,7 @@ export default function Home() {
             {features.map((f) => {
               const Icon = f.icon;
               return (
-                <div key={f.titleKey} className="group bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_30px_rgba(6,182,212,0.06)] hover:border-hairline-strong transition-all duration-200">
+                <div key={f.titleKey} className="group bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_30px_rgba(0,209,167,0.06)] hover:border-hairline-strong transition-all duration-200">
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-soft border border-primary/20 group-hover:bg-primary group-hover:border-primary transition-colors duration-200">
                     <Icon className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-200" />
                   </div>
@@ -232,7 +232,7 @@ export default function Home() {
               const Icon = p.icon;
               return (
                 <Link to="/catalog" key={p.titleKey} className="no-underline group">
-                  <div className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)] hover:border-primary/30 transition-all duration-200 flex items-start gap-4">
+                  <div className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_30px_rgba(0,209,167,0.08)] hover:border-primary/30 transition-all duration-200 flex items-start gap-4">
                     <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-canvas-soft-2 border border-hairline shrink-0 group-hover:bg-cyan-soft group-hover:border-primary/30 transition-colors">
                       <Icon className={cn('h-6 w-6', p.color)} />
                     </div>
@@ -306,7 +306,7 @@ export default function Home() {
                 className={cn(
                   'rounded-xl border p-8 flex flex-col relative',
                   tier.featured
-                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_50px_rgba(6,182,212,0.2)] md:scale-[1.03] z-10'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_50px_rgba(0,209,167,0.2)] md:scale-[1.03] z-10'
                     : 'bg-canvas-soft-2 border-hairline',
                 )}
               >
@@ -418,7 +418,7 @@ export default function Home() {
       <section className="bg-canvas-soft border-t border-hairline">
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'radial-gradient(ellipse 50% 60% at 50% 50%, rgba(6,182,212,0.1), transparent 60%)',
+            background: 'radial-gradient(ellipse 50% 60% at 50% 50%, rgba(0,209,167,0.1), transparent 60%)',
           }} />
           <div className="relative mx-auto max-w-[1400px] px-6 py-24 text-center">
             <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight">

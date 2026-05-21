@@ -74,7 +74,7 @@ export default function LazyWorldMap() {
         radius: 0.18,
         color: '#4b5563',
         shape: 'circle',
-        backgroundColor: '#11161e',
+        backgroundColor: '#152824',
       });
 
       // Extract viewBox dimensions

@@ -471,7 +471,7 @@ export default function ProductDetail() {
           {/* Left: Product info */}
           <div className="lg:col-span-2 space-y-8">
             {/* Product header */}
-            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.04)]">
+            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(0,209,167,0.04)]">
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-ink tracking-tight">
                   {product.name}
@@ -573,7 +573,7 @@ export default function ProductDetail() {
 
           {/* Right: Order form */}
           <div className="lg:col-span-1">
-            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.04)] md:sticky md:top-24">
+            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(0,209,167,0.04)] md:sticky md:top-24">
               <CardHeader>
                 <CardTitle className="text-base font-semibold text-ink">
                   {t('product.orderNow')}
@@ -707,7 +707,7 @@ export default function ProductDetail() {
 
             {/* Payment success panel */}
             {orderState === 'success' && paymentResult && (
-              <Card className="mt-6 bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.08)]">
+              <Card className="mt-6 bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(0,209,167,0.08)]">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-success" />
