@@ -21,7 +21,7 @@ export default function HomeHero() {
 
         {/* Headline */}
         <h1 className="max-w-4xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-ink tracking-tight leading-tight">
-          {t('home.heroTitle')}{' '}
+          {t('home.heroTitle')}<br />
           <span className="bg-gradient-to-r from-primary via-highlight-cyan to-highlight-teal bg-clip-text text-transparent">
             {t('home.heroHighlight')}
           </span>
