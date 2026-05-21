@@ -6,6 +6,7 @@ import PublicLayout from '@/layouts/PublicLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PageLoader from '@/components/PageLoader';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import HomeHero from '@/components/HomeHero';
 import { Toaster } from '@/hooks/use-toast';
 
 const Home = React.lazy(() => import('@/pages/Home'));
@@ -50,7 +51,14 @@ export default function App() {
         <Routes>
           {/* Public pages */}
           <Route element={<PublicLayout />}>
-            <Route path="/" element={<Suspense fallback={<PageLoader variant="public" />}><Home /></Suspense>} />
+            <Route path="/" element={
+              <>
+                <HomeHero />
+                <Suspense fallback={<PageLoader variant="public" />}>
+                  <Home />
+                </Suspense>
+              </>
+            } />
             <Route path="/catalog" element={<Suspense fallback={<PageLoader variant="public" />}><Catalog /></Suspense>} />
             <Route path="/catalog/:id" element={<Suspense fallback={<PageLoader variant="public" />}><ProductDetail /></Suspense>} />
             <Route path="/login" element={<Suspense fallback={<PageLoader variant="public" />}><Login /></Suspense>} />
