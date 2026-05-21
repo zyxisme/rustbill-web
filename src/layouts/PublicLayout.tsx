@@ -27,9 +27,9 @@ export default function PublicLayout() {
     <div className="min-h-screen flex flex-col bg-canvas">
       {/* Nav */}
       <header className="sticky top-0 z-50 h-16 bg-canvas border-b border-hairline">
-        <div className="mx-auto max-w-[1400px] h-full flex items-center justify-between px-6">
+        <div className="mx-auto max-w-[1400px] h-full flex items-center justify-between px-6 relative">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline">
+          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
             <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="32" height="32" rx="6" fill="#090c10" />
               <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
@@ -38,8 +38,8 @@ export default function PublicLayout() {
             RustBill
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop nav — centered */}
+          <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
