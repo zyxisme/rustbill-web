@@ -137,7 +137,7 @@ export default function Register() {
   const isLoading = authLoading || submitting;
 
   return (
-    <div className="min-h-screen bg-canvas flex items-center justify-center px-6 py-16">
+    <div className="min-h-screen bg-canvas flex items-center justify-center px-6 py-16 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       <div className="w-full max-w-md">
         {/* Card */}
         <div className="bg-canvas-soft-2 rounded-lg border border-hairline p-8 shadow-[0_0_20px_rgba(6,182,212,0.04)]">

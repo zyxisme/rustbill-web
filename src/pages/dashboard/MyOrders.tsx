@@ -165,7 +165,7 @@ export default function MyOrders() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       {/* Header */}
       <div>
         <h1 className="text-ink text-2xl font-semibold">{t('orders.title')}</h1>

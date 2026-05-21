@@ -237,7 +237,7 @@ export default function Catalog() {
 
   // ── Ready state ──
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       {/* Page title */}
       <div className="bg-canvas-soft border-b border-hairline">
         <div className="mx-auto max-w-[1400px] px-6 py-8">

@@ -163,7 +163,7 @@ export default function TicketDetail() {
 
   // ── Main ───────────────────────────────────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       {/* Back link */}
       <Link to="/dashboard/tickets" className="flex items-center gap-1 text-sm text-body hover:text-ink transition-colors no-underline">
         <ArrowLeft className="h-4 w-4" />

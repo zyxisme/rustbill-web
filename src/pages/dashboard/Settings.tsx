@@ -76,7 +76,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6 max-w-2xl animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       <h1 className="text-2xl font-semibold text-ink">{t('settings.title')}</h1>
 
       {/* Profile section */}

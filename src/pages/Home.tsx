@@ -99,7 +99,7 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col animate-in fade-in-0 duration-300">
       {/* ═══════════════════════════════════════════════════════
           HERO
           ═══════════════════════════════════════════════════════ */}

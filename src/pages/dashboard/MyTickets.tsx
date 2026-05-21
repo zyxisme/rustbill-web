@@ -186,7 +186,7 @@ export default function MyTickets() {
 
   // ── Main ───────────────────────────────────────────────────
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

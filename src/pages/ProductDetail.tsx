@@ -456,7 +456,7 @@ export default function ProductDetail() {
 
   // ── Ready state ──
   return (
-    <div className="min-h-screen bg-canvas pb-16">
+    <div className="min-h-screen bg-canvas pb-16 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 py-8">
         {/* Back link */}
         <Link

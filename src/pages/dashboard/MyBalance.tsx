@@ -162,7 +162,7 @@ export default function MyBalance() {
 
   // ── Main ───────────────────────────────────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       <h1 className="text-2xl font-semibold text-ink">{t('balance.title')}</h1>
 
       {/* Balance summary card */}
