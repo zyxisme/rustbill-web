@@ -102,7 +102,7 @@ export default function PublicLayout() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3">
+          <div className="md:hidden bg-canvas border-b border-hairline px-6 py-4 space-y-3 animate-in slide-in-from-top-2 fade-in-0 duration-200">
             <NavMenu items={navItems} mobile />
             <div className="pt-2 border-t border-hairline">
               <button

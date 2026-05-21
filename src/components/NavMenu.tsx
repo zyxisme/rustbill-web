@@ -44,9 +44,8 @@ function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
         mobile
           ? 'flex items-center py-1'
           : 'inline-flex items-center justify-center px-3 h-8 rounded-full',
-        isActive
-          ? 'text-ink bg-canvas-soft'
-          : 'text-body hover:text-ink hover:bg-canvas-soft',
+        isActive && !mobile && 'bg-canvas-soft',
+        isActive ? 'text-ink' : 'text-body hover:text-ink hover:bg-canvas-soft',
       )}
     >
       {label}
