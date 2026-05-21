@@ -171,7 +171,7 @@ export default function Catalog() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
               <Card key={i} className="bg-canvas-soft animate-pulse">
-                <CardContent className="p-lg">
+                <CardContent className="p-6">
                   <div className="h-5 w-32 bg-canvas-soft-2 rounded-sm mb-3" />
                   <div className="h-4 w-full bg-canvas-soft-2 rounded-sm mb-2" />
                   <div className="h-4 w-2/3 bg-canvas-soft-2 rounded-sm mb-4" />
@@ -194,7 +194,7 @@ export default function Catalog() {
     return (
       <div className="min-h-screen bg-canvas flex items-center justify-center">
         <Card className="max-w-md mx-6 bg-canvas-soft border-hairline">
-          <CardContent className="p-xl text-center">
+          <CardContent className="p-8 text-center">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-error-soft mx-auto mb-4">
               <RefreshCw className="h-6 w-6 text-error" />
             </div>
@@ -291,7 +291,7 @@ export default function Catalog() {
                 return (
                   <Card
                     key={product.id}
-                    className="bg-canvas-soft rounded-lg border border-hairline p-lg hover:shadow-[0_0_40px_rgba(6,182,212,0.06)] transition-shadow"
+                    className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_40px_rgba(6,182,212,0.06)] transition-shadow"
                   >
                     <CardContent className="p-0 flex flex-col h-full">
                       {/* Name */}

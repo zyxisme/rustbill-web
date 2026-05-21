@@ -89,7 +89,7 @@ export default function Register() {
     <div className="min-h-screen bg-canvas flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div className="bg-canvas-soft-2 rounded-lg border border-hairline p-xl shadow-[0_0_20px_rgba(6,182,212,0.04)]">
+        <div className="bg-canvas-soft-2 rounded-lg border border-hairline p-8 shadow-[0_0_20px_rgba(6,182,212,0.04)]">
           {/* Logo + Title */}
           <div className="text-center mb-6">
             <Link to="/" className="inline-flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline mb-4">

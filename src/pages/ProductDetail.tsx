@@ -377,7 +377,7 @@ export default function ProductDetail() {
     return (
       <div className="min-h-screen bg-canvas flex items-center justify-center">
         <Card className="max-w-md mx-6 bg-canvas-soft border-hairline">
-          <CardContent className="p-xl text-center">
+          <CardContent className="p-8 text-center">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-canvas-soft-2 border border-hairline mx-auto mb-4">
               <AlertCircle className="h-6 w-6 text-mute" />
             </div>
@@ -401,7 +401,7 @@ export default function ProductDetail() {
     return (
       <div className="min-h-screen bg-canvas flex items-center justify-center">
         <Card className="max-w-md mx-6 bg-canvas-soft border-hairline">
-          <CardContent className="p-xl text-center">
+          <CardContent className="p-8 text-center">
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-error-soft mx-auto mb-4">
               <RefreshCw className="h-6 w-6 text-error" />
             </div>
@@ -426,7 +426,7 @@ export default function ProductDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               <Card className="bg-canvas-soft">
-                <CardContent className="p-xl animate-pulse">
+                <CardContent className="p-8 animate-pulse">
                   <div className="h-8 w-64 bg-canvas-soft-2 rounded-sm mb-4" />
                   <div className="h-4 w-full bg-canvas-soft-2 rounded-sm mb-2" />
                   <div className="h-4 w-3/4 bg-canvas-soft-2 rounded-sm mb-8" />
@@ -440,7 +440,7 @@ export default function ProductDetail() {
             </div>
             <div>
               <Card className="bg-canvas-soft">
-                <CardContent className="p-xl animate-pulse">
+                <CardContent className="p-8 animate-pulse">
                   <div className="h-6 w-32 bg-canvas-soft-2 rounded-sm mb-4" />
                   <div className="h-10 w-full bg-canvas-soft-2 rounded-sm mb-4" />
                   <div className="h-10 w-full bg-canvas-soft-2 rounded-sm mb-4" />

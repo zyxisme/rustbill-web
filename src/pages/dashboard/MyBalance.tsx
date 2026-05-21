@@ -166,7 +166,7 @@ export default function MyBalance() {
       <h1 className="text-2xl font-semibold text-ink">{t('balance.title')}</h1>
 
       {/* Balance summary card */}
-      <div className="bg-canvas-soft rounded-lg border border-hairline p-xl">
+      <div className="bg-canvas-soft rounded-lg border border-hairline p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <p className="text-sm text-mute mb-2">{t('balance.available')}</p>

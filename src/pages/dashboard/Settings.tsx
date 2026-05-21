@@ -229,14 +229,14 @@ export default function SettingsPage() {
 
             {/* Error message */}
             {pwState === 'error' && pwError && (
-              <div className="p-sm bg-error-soft border border-error/30 rounded text-sm text-error">
+              <div className="p-3 bg-error-soft border border-error/30 rounded text-sm text-error">
                 {pwError}
               </div>
             )}
 
             {/* Success message */}
             {pwState === 'success' && (
-              <div className="p-sm bg-cyan-soft border border-success/30 rounded text-sm text-success">
+              <div className="p-3 bg-cyan-soft border border-success/30 rounded text-sm text-success">
                 {t('settings.passwordChanged')}
               </div>
             )}

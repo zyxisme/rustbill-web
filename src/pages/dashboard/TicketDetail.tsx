@@ -207,7 +207,7 @@ export default function TicketDetail() {
           replies.map((reply) => (
             <div
               key={reply.id}
-              className="bg-canvas-soft border border-hairline rounded-md p-md"
+              className="bg-canvas-soft border border-hairline rounded-md p-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-ink">

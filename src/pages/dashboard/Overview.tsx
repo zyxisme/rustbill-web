@@ -73,7 +73,7 @@ function cycleI18nKey(cycle: string): string {
 
 function SkeletonCard() {
   return (
-    <div className="bg-canvas-soft rounded-lg border border-hairline p-lg animate-pulse">
+    <div className="bg-canvas-soft rounded-lg border border-hairline p-6 animate-pulse">
       <div className="flex items-center gap-3 mb-3">
         <div className="w-10 h-10 rounded-full bg-canvas-soft-2" />
         <div className="h-4 w-20 bg-canvas-soft-2 rounded" />
@@ -251,7 +251,7 @@ export default function Overview() {
                   to={stat.href}
                   className="no-underline group"
                 >
-                  <div className="bg-canvas-soft rounded-lg border border-hairline p-lg hover:border-primary/30 transition-colors">
+                  <div className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:border-primary/30 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-10 h-10 rounded-full bg-cyan-soft flex items-center justify-center">
                         <Icon className="h-5 w-5 text-primary" />
