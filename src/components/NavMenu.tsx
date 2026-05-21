@@ -40,10 +40,10 @@ function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
     <Link
       to={item.href}
       className={cn(
-        'text-sm no-underline transition-colors',
+        'text-sm leading-none no-underline transition-colors',
         mobile
-          ? 'block py-1'
-          : 'px-3 py-1.5 rounded-full',
+          ? 'flex items-center py-1'
+          : 'inline-flex items-center px-3 h-8 rounded-full',
         isActive
           ? 'text-ink bg-canvas-soft'
           : 'text-body hover:text-ink hover:bg-canvas-soft',
@@ -83,7 +83,7 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
       <div>
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center gap-1 w-full text-left py-1 text-sm text-mute bg-transparent border-0 cursor-pointer"
+          className="flex items-center gap-1 w-full text-left py-1 text-sm leading-none text-mute bg-transparent border-0 cursor-pointer"
         >
           {label}
           <ChevronDown className={cn('h-3 w-3 transition-transform', open && 'rotate-180')} />
@@ -114,7 +114,7 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft bg-transparent border-0 cursor-pointer transition-colors"
+        className="flex items-center gap-1 px-3 h-8 text-sm leading-none text-body hover:text-ink rounded-full hover:bg-canvas-soft bg-transparent border-0 cursor-pointer transition-colors"
       >
         {label}
         <ChevronDown className={cn('h-3 w-3 transition-transform', open && 'rotate-180')} />
