@@ -35,4 +35,6 @@ declare module 'virtual:brand' {
   export const colors: Record<string, string>;
   export const header: { nav: NavItem[] } | null;
   export const sidebar: { nav: NavItem[] } | null;
+
+  export type { NavItem, LogoConfig, BrandConfig };
 }
