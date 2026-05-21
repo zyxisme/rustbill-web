@@ -126,7 +126,7 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
               <Link
                 key={child.i18n || child.label}
                 to={child.href || '#'}
-                className="block px-4 py-2 text-sm text-body hover:text-ink hover:bg-canvas-soft-2 no-underline transition-colors"
+                className="block px-4 py-2 text-sm text-center text-body hover:text-ink hover:bg-canvas-soft-2 no-underline transition-colors"
               >
                 {navLabel(t, child)}
               </Link>
