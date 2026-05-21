@@ -65,13 +65,13 @@ export default function LazyWorldMap() {
         map.addPin({
           lat: c.lat,
           lng: c.lng,
-          svgOptions: { color: accent, radius: 0.5 },
+          svgOptions: { color: accent, radius: 0.35 },
           data: c as ClusterMarker,
         });
       }
 
       const svg = map.getSVG({
-        radius: 0.3,
+        radius: 0.18,
         color: '#4b5563',
         shape: 'circle',
         backgroundColor: '#11161e',
@@ -90,7 +90,7 @@ export default function LazyWorldMap() {
       const pinData: PinPoint[] = [];
       for (const c of circles) {
         const r = parseFloat(c.getAttribute('r') || '0');
-        if (r >= 0.4) {
+        if (r >= 0.3) {
           const fill = c.getAttribute('fill');
           if (fill && clusters.length > 0) {
             const cx = parseFloat(c.getAttribute('cx') || '0');
