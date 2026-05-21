@@ -519,11 +519,10 @@ export default function ProductDetail() {
                     {t('product.productDescription')}
                   </h4>
                 <LazyMarkdown
-                  className="prose prose-sm max-w-none text-body leading-relaxed
-                    [&_h1]:text-ink [&_h2]:text-ink [&_h3]:text-ink [&_h4]:text-ink
-                    [&_h1]:text-xl [&_h2]:text-lg [&_h3]:text-base
-                    [&_h1]:font-semibold [&_h2]:font-semibold [&_h3]:font-medium
-                    [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:mt-5 [&_h3]:mb-2
+                  className="text-body text-sm leading-relaxed space-y-3 max-w-none
+                    [&_h1]:text-ink [&_h1]:font-semibold [&_h1]:text-lg
+                    [&_h2]:text-ink [&_h2]:font-semibold [&_h2]:text-base
+                    [&_h3]:text-ink [&_h3]:font-semibold [&_h3]:text-sm
                     [&_p]:leading-relaxed [&_ul]:pl-4 [&_ol]:pl-4
                     [&_code]:bg-canvas [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-xs [&_code]:text-xs [&_code]:font-mono [&_code]:text-primary
                     [&_pre]:bg-canvas [&_pre]:p-4 [&_pre]:rounded-sm [&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-hairline
