@@ -20,6 +20,15 @@ interface NavItem {
   children?: NavItem[];
 }
 
+interface Cluster {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  zones: number;
+  latency: string;
+}
+
 interface BrandConfig {
   brandName: string;
   tagline?: string;
@@ -29,6 +38,7 @@ interface BrandConfig {
   colors?: Record<string, string>;
   header?: { nav?: NavItem[] };
   sidebar?: { nav?: NavItem[] };
+  clusters?: Cluster[];
 }
 
 // ─── HSL Color Utilities ───
@@ -186,6 +196,7 @@ const DEFAULT_BRAND: BrandConfig = {
       { i18n: 'nav.settings', href: '/dashboard/settings', icon: 'Settings' },
     ],
   },
+  clusters: [],
 };
 
 // ─── Load & Parse brand.yaml ───
@@ -205,6 +216,7 @@ function loadBrandConfig(rootDir: string): BrandConfig {
       colors: parsed.colors || undefined,
       header: parsed.header || DEFAULT_BRAND.header,
       sidebar: parsed.sidebar || DEFAULT_BRAND.sidebar,
+      clusters: Array.isArray(parsed.clusters) ? parsed.clusters : [],
     };
   } catch (err) {
     console.warn(`[vite-plugin-brand] Failed to load ${yamlPath}:`, err instanceof Error ? err.message : err);
@@ -237,6 +249,7 @@ function generateVirtualModule(config: BrandConfig): string {
     `export const colors = ${JSON.stringify(colors)};`,
     `export const header = ${JSON.stringify(config.header ?? null)};`,
     `export const sidebar = ${JSON.stringify(config.sidebar ?? null)};`,
+    `export const clusters = ${JSON.stringify(config.clusters ?? [])};`,
   ];
 
   return lines.join('\n');

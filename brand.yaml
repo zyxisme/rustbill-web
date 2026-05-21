@@ -104,3 +104,42 @@ sidebar:
     - i18n: "nav.settings"
       href: "/dashboard/settings"
       icon: "Settings"
+
+# ─── 集群节点 (点阵世界地图) ───
+clusters:
+  - id: "us-west"
+    name: "美国西部"
+    lat: 37.0
+    lng: -122.0
+    zones: 3
+    latency: "< 10ms"
+  - id: "us-east"
+    name: "美国东部"
+    lat: 40.7
+    lng: -74.0
+    zones: 4
+    latency: "< 15ms"
+  - id: "eu-west"
+    name: "欧洲西部"
+    lat: 51.5
+    lng: -0.1
+    zones: 3
+    latency: "< 12ms"
+  - id: "eu-central"
+    name: "欧洲中部"
+    lat: 50.1
+    lng: 8.7
+    zones: 2
+    latency: "< 8ms"
+  - id: "ap-se"
+    name: "亚太东南"
+    lat: 1.3
+    lng: 103.8
+    zones: 3
+    latency: "< 5ms"
+  - id: "ap-ne"
+    name: "亚太东北"
+    lat: 35.7
+    lng: 139.7
+    zones: 2
+    latency: "< 8ms"

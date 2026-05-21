@@ -15,6 +15,15 @@ interface LogoConfig {
   url?: string;
 }
 
+interface Cluster {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  zones: number;
+  latency: string;
+}
+
 interface BrandConfig {
   brandName: string;
   tagline: string;
@@ -24,6 +33,7 @@ interface BrandConfig {
   colors: Record<string, string>;
   header: { nav: NavItem[] } | null;
   sidebar: { nav: NavItem[] } | null;
+  clusters: Cluster[];
 }
 
 declare module 'virtual:brand' {
@@ -35,6 +45,7 @@ declare module 'virtual:brand' {
   export const colors: Record<string, string>;
   export const header: { nav: NavItem[] } | null;
   export const sidebar: { nav: NavItem[] } | null;
+  export const clusters: Cluster[];
 
-  export type { NavItem, LogoConfig, BrandConfig };
+  export type { NavItem, LogoConfig, BrandConfig, Cluster };
 }

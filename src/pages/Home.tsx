@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 import {
   Server, Shield, Zap, ArrowRight, Check, Globe, Cpu,
   HardDrive, Cloud, Database, ChevronDown, Star, TrendingUp,
-  Clock, Headphones, Layers, Gauge, MapPin,
+  Clock, Headphones, Layers, Gauge,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { LazyTerminal } from '@/components/LazyTerminal';
+import LazyWorldMap from '@/components/LazyWorldMap';
 
 /* ─── Data ─── */
 
@@ -20,15 +21,6 @@ const features = [
   { icon: Zap, titleKey: 'home.feature4Title', descKey: 'home.feature4Desc' },
   { icon: Clock, titleKey: 'home.feature5Title', descKey: 'home.feature5Desc' },
   { icon: Headphones, titleKey: 'home.feature6Title', descKey: 'home.feature6Desc' },
-];
-
-const regions = [
-  { code: 'us-west', nameKey: 'home.regionUSWest', lat: 37, flag: '🇺🇸', zones: 3, latency: '< 10ms' },
-  { code: 'us-east', nameKey: 'home.regionUSEast', lat: 40, flag: '🇺🇸', zones: 4, latency: '< 15ms' },
-  { code: 'eu-west', nameKey: 'home.regionEUWest', lat: 51, flag: '🇪🇺', zones: 3, latency: '< 12ms' },
-  { code: 'eu-cent', nameKey: 'home.regionEUCentral', lat: 50, flag: '🇪🇺', zones: 2, latency: '< 8ms' },
-  { code: 'ap-se', nameKey: 'home.regionAPSE', lat: 1, flag: '🇸🇬', zones: 3, latency: '< 5ms' },
-  { code: 'ap-ne', nameKey: 'home.regionAPNE', lat: 35, flag: '🇯🇵', zones: 2, latency: '< 8ms' },
 ];
 
 const productCategories = [
@@ -151,25 +143,8 @@ export default function Home() {
             title={t('home.infraTitle')}
             subtitle={t('home.infraSubtitle')}
           />
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {regions.map((r) => (
-              <div key={r.code} className="group bg-canvas-soft-2 rounded-lg border border-hairline p-6 hover:shadow-[0_0_20px_rgba(6,182,212,0.04)] hover:border-primary/30 transition-all duration-200">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">{r.flag}</span>
-                    <div>
-                      <h4 className="text-ink font-medium text-sm">{t(r.nameKey)}</h4>
-                      <span className="text-xs text-mute">{r.zones} Availability Zones</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xs font-mono text-success">{r.latency}</span>
-                    <br />
-                    <span className="text-xs text-mute">{t('home.regionLatency')}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mt-14">
+            <LazyWorldMap />
           </div>
         </div>
       </section>
