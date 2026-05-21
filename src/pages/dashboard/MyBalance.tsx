@@ -4,7 +4,7 @@ import { Wallet, ChevronLeft, ChevronRight } from 'lucide-react';
 import { api } from '@/api/grpc-client';
 import { useAuthStore } from '@/stores/auth';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
@@ -229,7 +229,7 @@ export default function MyBalance() {
                       <TableHead className="w-24">{t('balance.colType')}</TableHead>
                       <TableHead className="w-32 text-right">{t('balance.colAmount')}</TableHead>
                       <TableHead className="w-32 text-right">{t('balance.colBalance')}</TableHead>
-                      <TableHead>{t('balance.colDescription')}</TableHead>
+                      <TableHead className="hidden lg:table-cell">{t('balance.colDescription')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -253,7 +253,7 @@ export default function MyBalance() {
                         <TableCell className="text-right font-mono text-sm text-ink tabular-nums">
                           {formatAmount(tx.balanceAfter)}
                         </TableCell>
-                        <TableCell className="text-xs text-body max-w-xs truncate">
+                        <TableCell className="hidden lg:table-cell text-xs text-body max-w-xs truncate">
                           {tx.description || '--'}
                         </TableCell>
                       </TableRow>
@@ -281,7 +281,7 @@ export default function MyBalance() {
                     onClick={() => handlePageChange(meta.page - 1)}
                   >
                     <ChevronLeft className="h-4 w-4" />
-                    {t('common.prev')}
+                    <span className="hidden sm:inline">{t('common.prev')}</span>
                   </Button>
                   <span className="text-xs text-body px-2">
                     {t('common.page', { page: meta.page })}
@@ -292,7 +292,7 @@ export default function MyBalance() {
                     disabled={meta.page >= meta.totalPages}
                     onClick={() => handlePageChange(meta.page + 1)}
                   >
-                    {t('common.next')}
+                    <span className="hidden sm:inline">{t('common.next')}</span>
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>

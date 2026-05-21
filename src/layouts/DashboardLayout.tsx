@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -11,10 +12,10 @@ import {
   ChevronLeft,
   LogOut,
   Globe,
+  Menu,
+  X,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
 import { useAuthStore } from '@/stores/auth';
 
 const navItems = [
@@ -33,6 +34,10 @@ export default function DashboardLayout() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const closeSidebar = () => setSidebarOpen(false);
+
   const toggleLang = () => {
     const next = i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN';
     i18n.changeLanguage(next);
@@ -47,11 +52,23 @@ export default function DashboardLayout() {
 
   return (
     <div className="min-h-screen flex bg-canvas">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          onClick={closeSidebar}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 z-40 h-screen w-60 bg-canvas-soft border-r border-hairline flex flex-col">
+      <aside
+        className={`fixed left-0 top-0 z-50 h-screen w-60 bg-canvas-soft border-r border-hairline flex flex-col transition-transform duration-200 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 md:z-40`}
+      >
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-5 border-b border-hairline shrink-0">
-          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline">
+          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline" onClick={closeSidebar}>
             <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="32" height="32" rx="6" fill="#090c10" />
               <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#06b6d4" strokeWidth="1.5" fill="none" />
@@ -59,6 +76,14 @@ export default function DashboardLayout() {
             </svg>
             RustBill
           </Link>
+          {/* Close button (mobile only) */}
+          <button
+            onClick={closeSidebar}
+            className="md:hidden ml-auto p-1 text-mute hover:text-ink bg-transparent border-0 cursor-pointer"
+            aria-label="Close sidebar"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Nav items */}
@@ -70,6 +95,7 @@ export default function DashboardLayout() {
               <Link
                 key={item.href}
                 to={item.href}
+                onClick={closeSidebar}
                 className={`flex items-center gap-3 px-3 py-2 text-sm rounded-sm no-underline transition-colors ${
                   isActive
                     ? 'text-ink bg-canvas-soft-2 border-l-2 border-l-primary -ml-[2px]'
@@ -116,19 +142,28 @@ export default function DashboardLayout() {
       </aside>
 
       {/* Main content */}
-      <div className="ml-60 flex-1 flex flex-col min-h-screen">
-        {/* Back to homepage */}
-        <div className="h-16 flex items-center px-6 border-b border-hairline bg-canvas shrink-0">
+      <div className="md:ml-60 ml-0 flex-1 flex flex-col min-h-screen">
+        {/* Top bar */}
+        <div className="h-16 flex items-center px-4 sm:px-6 border-b border-hairline bg-canvas shrink-0 gap-3">
+          {/* Hamburger (mobile only) */}
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="md:hidden p-1 text-mute hover:text-ink bg-transparent border-0 cursor-pointer"
+            aria-label="Open sidebar"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+
           <Link
             to="/"
             className="flex items-center gap-1 text-sm text-body hover:text-ink transition-colors no-underline"
           >
             <ChevronLeft className="h-4 w-4" />
-            {t('common.backToHome')}
+            <span className="hidden sm:inline">{t('common.backToHome')}</span>
           </Link>
         </div>
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 sm:p-6">
           <Outlet />
         </main>
       </div>

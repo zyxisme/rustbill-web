@@ -213,8 +213,8 @@ export default function MyOrders() {
                 <TableHead>{t('orders.colProduct')}</TableHead>
                 <TableHead>{t('orders.colAmount')}</TableHead>
                 <TableHead>{t('orders.colStatus')}</TableHead>
-                <TableHead>{t('orders.colCycle')}</TableHead>
-                <TableHead>{t('orders.colCreatedAt')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('orders.colCycle')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('orders.colCreatedAt')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -224,8 +224,8 @@ export default function MyOrders() {
                   <TableCell><div className="h-4 w-24 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
                   <TableCell><div className="h-4 w-16 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
                   <TableCell><div className="h-5 w-14 bg-canvas-soft-2 rounded-full animate-pulse" /></TableCell>
-                  <TableCell><div className="h-4 w-12 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
-                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
+                  <TableCell><div className="h-4 w-12 bg-canvas-soft-2 rounded animate-pulse hidden md:block" /></TableCell>
+                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse hidden md:block" /></TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -251,8 +251,8 @@ export default function MyOrders() {
                   <TableHead>{t('orders.colProduct')}</TableHead>
                   <TableHead>{t('orders.colAmount')}</TableHead>
                   <TableHead>{t('orders.colStatus')}</TableHead>
-                  <TableHead>{t('orders.colCycle')}</TableHead>
-                  <TableHead>{t('orders.colCreatedAt')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCycle')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCreatedAt')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -272,10 +272,10 @@ export default function MyOrders() {
                     <TableCell>
                       <StatusTag status={order.status} type="order" />
                     </TableCell>
-                    <TableCell className="text-body text-xs">
+                    <TableCell className="hidden md:table-cell text-body text-xs">
                       {t(cycleI18nKey(order.billingCycle), order.billingCycle)}
                     </TableCell>
-                    <TableCell className="text-body text-xs">
+                    <TableCell className="hidden md:table-cell text-body text-xs">
                       {order.createdAt
                         ? new Date(order.createdAt).toLocaleDateString()
                         : '--'}
@@ -304,7 +304,7 @@ export default function MyOrders() {
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  {t('orders.prevPage')}
+                  <span className="hidden sm:inline">{t('orders.prevPage')}</span>
                 </Button>
                 <span className="text-body text-sm px-2">
                   {t('orders.page', { page: meta.page })}
@@ -315,7 +315,7 @@ export default function MyOrders() {
                   disabled={page >= meta.totalPages}
                   onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
                 >
-                  {t('orders.nextPage')}
+                  <span className="hidden sm:inline">{t('orders.nextPage')}</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>

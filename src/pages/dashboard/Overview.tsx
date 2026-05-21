@@ -16,8 +16,6 @@ import { StatusTag } from '@/components/StatusTag';
 import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
 } from '@/components/ui/card';
 import {
@@ -29,7 +27,6 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
-import type { UserInfo } from '@/stores/auth';
 
 // ── Local types ──────────────────────────────────────────────────
 
@@ -40,13 +37,6 @@ interface OrderInfo {
   amount: string;
   billingCycle: string;
   createdAt: string;
-}
-
-interface PageMeta {
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
 }
 
 interface StatCard {
@@ -101,8 +91,8 @@ function SkeletonRow() {
       <TableCell><div className="h-4 w-24 bg-canvas-soft-2 rounded" /></TableCell>
       <TableCell><div className="h-4 w-16 bg-canvas-soft-2 rounded" /></TableCell>
       <TableCell><div className="h-5 w-14 bg-canvas-soft-2 rounded-full" /></TableCell>
-      <TableCell><div className="h-4 w-12 bg-canvas-soft-2 rounded" /></TableCell>
-      <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded" /></TableCell>
+      <TableCell><div className="h-4 w-12 bg-canvas-soft-2 rounded hidden md:block" /></TableCell>
+      <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded hidden md:block" /></TableCell>
     </TableRow>
   );
 }
@@ -330,8 +320,8 @@ export default function Overview() {
                   <TableHead>{t('orders.colProduct')}</TableHead>
                   <TableHead>{t('orders.colAmount')}</TableHead>
                   <TableHead>{t('orders.colStatus')}</TableHead>
-                  <TableHead>{t('orders.colCycle')}</TableHead>
-                  <TableHead>{t('orders.colCreatedAt')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCycle')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCreatedAt')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -362,8 +352,8 @@ export default function Overview() {
                   <TableHead>{t('orders.colProduct')}</TableHead>
                   <TableHead>{t('orders.colAmount')}</TableHead>
                   <TableHead>{t('orders.colStatus')}</TableHead>
-                  <TableHead>{t('orders.colCycle')}</TableHead>
-                  <TableHead>{t('orders.colCreatedAt')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCycle')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('orders.colCreatedAt')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -383,10 +373,10 @@ export default function Overview() {
                     <TableCell>
                       <StatusTag status={order.status} type="order" />
                     </TableCell>
-                    <TableCell className="text-body text-xs">
+                    <TableCell className="hidden md:table-cell text-body text-xs">
                       {t(cycleI18nKey(order.billingCycle), order.billingCycle)}
                     </TableCell>
-                    <TableCell className="text-body text-xs">
+                    <TableCell className="hidden md:table-cell text-body text-xs">
                       {order.createdAt
                         ? new Date(order.createdAt).toLocaleDateString()
                         : '--'}

@@ -290,7 +290,7 @@ export default function MyTickets() {
                   onClick={() => handlePageChange(meta.page - 1)}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  {t('common.prev')}
+                  <span className="hidden sm:inline">{t('common.prev')}</span>
                 </Button>
                 <span className="text-xs text-body px-2">
                   {t('common.page', { page: meta.page })}
@@ -301,7 +301,7 @@ export default function MyTickets() {
                   disabled={meta.page >= meta.totalPages}
                   onClick={() => handlePageChange(meta.page + 1)}
                 >
-                  {t('common.next')}
+                  <span className="hidden sm:inline">{t('common.next')}</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>

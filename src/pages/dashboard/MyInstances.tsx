@@ -172,9 +172,9 @@ export default function MyInstances() {
               <TableRow>
                 <TableHead>{t('instances.colId')}</TableHead>
                 <TableHead>{t('instances.colProduct')}</TableHead>
-                <TableHead>{t('instances.colIp')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('instances.colIp')}</TableHead>
                 <TableHead>{t('instances.colStatus')}</TableHead>
-                <TableHead>{t('instances.colCreatedAt')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('instances.colCreatedAt')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -182,9 +182,9 @@ export default function MyInstances() {
                 <TableRow key={i}>
                   <TableCell><div className="h-4 w-16 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
                   <TableCell><div className="h-4 w-24 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
-                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
+                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse hidden md:block" /></TableCell>
                   <TableCell><div className="h-5 w-14 bg-canvas-soft-2 rounded-full animate-pulse" /></TableCell>
-                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse" /></TableCell>
+                  <TableCell><div className="h-4 w-20 bg-canvas-soft-2 rounded animate-pulse hidden md:block" /></TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -208,9 +208,9 @@ export default function MyInstances() {
                 <TableRow>
                   <TableHead>{t('instances.colId')}</TableHead>
                   <TableHead>{t('instances.colProduct')}</TableHead>
-                  <TableHead>{t('instances.colIp')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('instances.colIp')}</TableHead>
                   <TableHead>{t('instances.colStatus')}</TableHead>
-                  <TableHead>{t('instances.colCreatedAt')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('instances.colCreatedAt')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -224,13 +224,13 @@ export default function MyInstances() {
                       {truncateUuid(inst.id)}
                     </TableCell>
                     <TableCell className="text-ink">{inst.productName}</TableCell>
-                    <TableCell className="text-ink font-mono text-xs">
+                    <TableCell className="hidden md:table-cell text-ink font-mono text-xs">
                       {inst.ipAddress || t('instanceDetail.unassigned')}
                     </TableCell>
                     <TableCell>
                       <StatusTag status={inst.status} type="instance" />
                     </TableCell>
-                    <TableCell className="text-body text-xs">
+                    <TableCell className="hidden md:table-cell text-body text-xs">
                       {inst.createdAt
                         ? new Date(inst.createdAt).toLocaleDateString()
                         : '--'}
@@ -259,7 +259,7 @@ export default function MyInstances() {
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  {t('common.prev')}
+                  <span className="hidden sm:inline">{t('common.prev')}</span>
                 </Button>
                 <span className="text-body text-sm px-2">
                   {t('common.page', { page: meta.page })}
@@ -270,7 +270,7 @@ export default function MyInstances() {
                   disabled={page >= meta.totalPages}
                   onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
                 >
-                  {t('common.next')}
+                  <span className="hidden sm:inline">{t('common.next')}</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>

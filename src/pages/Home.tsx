@@ -115,7 +115,7 @@ export default function Home() {
           </div>
 
           {/* Headline */}
-          <h1 className="max-w-4xl text-5xl md:text-6xl lg:text-7xl font-semibold text-ink tracking-tight leading-tight">
+          <h1 className="max-w-4xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-ink tracking-tight leading-tight">
             {t('home.heroTitle')}{' '}
             <span className="bg-gradient-to-r from-primary via-highlight-cyan to-highlight-teal bg-clip-text text-transparent">
               {t('home.heroHighlight')}
@@ -123,7 +123,7 @@ export default function Home() {
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-6 max-w-2xl text-lg md:text-xl text-body leading-relaxed">
+          <p className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl text-body leading-relaxed">
             {t('home.heroSubtitle')}
           </p>
 
@@ -432,7 +432,7 @@ export default function Home() {
                 className={cn(
                   'rounded-xl border p-xl flex flex-col relative',
                   tier.featured
-                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_50px_rgba(6,182,212,0.2)] scale-[1.03] z-10'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_50px_rgba(6,182,212,0.2)] md:scale-[1.03] z-10'
                     : 'bg-canvas-soft-2 border-hairline',
                 )}
               >

@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FileText, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 import { api } from '@/api/grpc-client';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import {
@@ -203,9 +202,9 @@ export default function MyInvoices() {
                     <TableHead>{t('invoices.colNumber')}</TableHead>
                     <TableHead>{t('invoices.colPeriod')}</TableHead>
                     <TableHead>{t('invoices.colAmount')}</TableHead>
-                    <TableHead>{t('common.amount')}</TableHead>
+                    <TableHead className="hidden md:table-cell">{t('common.amount')}</TableHead>
                     <TableHead>{t('invoices.colStatus')}</TableHead>
-                    <TableHead>{t('invoices.colDueDate')}</TableHead>
+                    <TableHead className="hidden md:table-cell">{t('invoices.colDueDate')}</TableHead>
                     <TableHead className="w-12">{t('common.view')}</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -225,7 +224,7 @@ export default function MyInvoices() {
                       <TableCell className="font-mono text-sm text-ink tabular-nums">
                         {formatAmount(inv.totalAmount)}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="hidden md:table-cell">
                         {formatAmount(inv.taxAmount) !== '--' && parseFloat(inv.taxAmount) > 0 ? (
                           <span className="text-xs text-body">
                             {`${t('common.amount')} ${formatAmount(inv.amount)} + ${t('common.tax', '税')} ${formatAmount(inv.taxAmount)}`}
@@ -237,7 +236,7 @@ export default function MyInvoices() {
                       <TableCell>
                         <StatusTag status={inv.status} type="invoice" />
                       </TableCell>
-                      <TableCell className="text-xs text-body">
+                      <TableCell className="hidden md:table-cell text-xs text-body">
                         {formatDate(inv.dueDate)}
                       </TableCell>
                       <TableCell>
@@ -270,7 +269,7 @@ export default function MyInvoices() {
                   onClick={() => handlePageChange(meta.page - 1)}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  {t('common.prev')}
+                  <span className="hidden sm:inline">{t('common.prev')}</span>
                 </Button>
                 <span className="text-xs text-body px-2">
                   {t('common.page', { page: meta.page })}
@@ -281,7 +280,7 @@ export default function MyInvoices() {
                   disabled={meta.page >= meta.totalPages}
                   onClick={() => handlePageChange(meta.page + 1)}
                 >
-                  {t('common.next')}
+                  <span className="hidden sm:inline">{t('common.next')}</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
@@ -300,7 +299,7 @@ export default function MyInvoices() {
               </DialogHeader>
               <div className="space-y-4 mt-4">
                 {/* Summary */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-mute">{t('invoices.colNumber')}: </span>
                     <span className="text-ink font-mono">{selectedInvoice.invoiceNumber}</span>

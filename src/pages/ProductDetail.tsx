@@ -16,7 +16,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -458,7 +457,7 @@ export default function ProductDetail() {
   // ── Ready state ──
   return (
     <div className="min-h-screen bg-canvas pb-16">
-      <div className="mx-auto max-w-[1400px] px-6 py-8">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 py-8">
         {/* Back link */}
         <Link
           to="/catalog"
@@ -500,7 +499,7 @@ export default function ProductDetail() {
                               i % 2 === 0 ? 'bg-canvas' : 'bg-canvas-soft',
                             )}
                           >
-                            <td className="px-4 py-2.5 text-body font-medium w-40">
+                            <td className="px-4 py-2.5 text-body font-medium min-w-[90px] sm:min-w-[140px]">
                               {key}
                             </td>
                             <td className="px-4 py-2.5 text-ink">{val}</td>
@@ -574,7 +573,7 @@ export default function ProductDetail() {
 
           {/* Right: Order form */}
           <div className="lg:col-span-1">
-            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.04)] sticky top-24">
+            <Card className="bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.04)] md:sticky md:top-24">
               <CardHeader>
                 <CardTitle className="text-base font-semibold text-ink">
                   {t('product.orderNow')}
@@ -723,7 +722,7 @@ export default function ProductDetail() {
                       <img
                         src={paymentResult.qrCode}
                         alt={t('product.qrCode')}
-                        className="w-48 h-48 rounded-sm border border-hairline bg-white p-2"
+                        className="w-36 h-36 sm:w-48 sm:h-48 rounded-sm border border-hairline bg-white p-2"
                       />
                     </div>
                   )}

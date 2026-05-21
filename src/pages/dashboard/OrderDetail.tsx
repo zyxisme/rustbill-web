@@ -391,7 +391,7 @@ export default function OrderDetail() {
                       <img
                         src={paymentResult.qrCode}
                         alt="QR Code"
-                        className="w-48 h-48 border border-hairline rounded-lg bg-white p-2"
+                        className="w-36 h-36 sm:w-48 sm:h-48 border border-hairline rounded-lg bg-white p-2"
                       />
                     </div>
                   )}
