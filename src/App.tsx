@@ -24,6 +24,7 @@ const MyTickets = React.lazy(() => import('@/pages/dashboard/MyTickets'));
 const TicketDetail = React.lazy(() => import('@/pages/dashboard/TicketDetail'));
 const MyBalance = React.lazy(() => import('@/pages/dashboard/MyBalance'));
 const Settings = React.lazy(() => import('@/pages/dashboard/Settings'));
+const ApiKeys = React.lazy(() => import('@/pages/dashboard/ApiKeys'));
 const Terms = React.lazy(() => import('@/pages/legal/Terms'));
 const Privacy = React.lazy(() => import('@/pages/legal/Privacy'));
 
@@ -80,6 +81,7 @@ export default function App() {
             <Route path="/dashboard/tickets" element={<Suspense fallback={<PageLoader variant="dashboard" />}><MyTickets /></Suspense>} />
             <Route path="/dashboard/tickets/:id" element={<Suspense fallback={<PageLoader variant="dashboard" />}><TicketDetail /></Suspense>} />
             <Route path="/dashboard/balance" element={<Suspense fallback={<PageLoader variant="dashboard" />}><MyBalance /></Suspense>} />
+            <Route path="/dashboard/api-keys" element={<Suspense fallback={<PageLoader variant="dashboard" />}><ApiKeys /></Suspense>} />
             <Route path="/dashboard/settings" element={<Suspense fallback={<PageLoader variant="dashboard" />}><Settings /></Suspense>} />
           </Route>
         </Routes>

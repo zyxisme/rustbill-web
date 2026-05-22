@@ -18,7 +18,8 @@
     "gotoAdmin": "Admin Panel",
     "legal": "Legal",
     "terms": "Terms of Service",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "apiKeys": "API Keys"
   },
   "common": {
     "save": "Save",
@@ -627,5 +628,30 @@
     "amount": "Please enter a valid amount",
     "numeric": "Please enter a number",
     "url": "Please enter a valid URL"
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "description": "Manage API keys for downstream RustBill system integration.",
+    "create": "Create API Key",
+    "keyName": "Key Name",
+    "keyNamePlaceholder": "e.g. Beijing Agent",
+    "newKeyNotice": "New API Key (shown only once, save immediately)",
+    "copyToClipboard": "Copy to Clipboard",
+    "emptyTitle": "No API Keys",
+    "emptyDescription": "Create an API key to integrate with downstream RustBill systems",
+    "colName": "Name",
+    "colKey": "Key",
+    "colStatus": "Status",
+    "colCreatedAt": "Created",
+    "colLastUsed": "Last Used",
+    "colActions": "Actions",
+    "statusEnabled": "Enabled",
+    "statusRevoked": "Revoked",
+    "revoke": "Revoke",
+    "revokeConfirm": "Revoke this API key? Downstream systems will lose connectivity.",
+    "permissionDenied": "Your account does not have API Key permission. Please contact your administrator.",
+    "loadFailed": "Failed to load: {{error}}",
+    "createFailed": "Failed to create: {{error}}",
+    "revokeFailed": "Failed to revoke: {{error}}"
   }
 }

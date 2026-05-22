@@ -651,3 +651,48 @@ export const ListGatewaysResponseDef: MessageDef = {
     { no: 1, name: 'gateways', type: 'message', message: GatewayInfoDef, repeated: true },
   ],
 };
+
+// ── downstream.proto · ApiKeyService ──────────────────────────────
+
+export const CreateApiKeyRequestDef: MessageDef = {
+  fields: [
+    { name: 'name', type: 'string', no: 1 },
+    { name: 'customerId', type: 'string', no: 2 },
+  ],
+};
+
+export const CreateApiKeyResponseDef: MessageDef = {
+  fields: [
+    { name: 'apiKey', type: 'string', no: 1 },
+    { name: 'keyPrefix', type: 'string', no: 2 },
+    { name: 'id', type: 'string', no: 3 },
+  ],
+};
+
+export const ListApiKeysRequestDef: MessageDef = {
+  fields: [{ name: 'customerId', type: 'string', no: 1 }],
+};
+
+export const ApiKeyInfoDef: MessageDef = {
+  fields: [
+    { name: 'id', type: 'string', no: 1 },
+    { name: 'keyPrefix', type: 'string', no: 2 },
+    { name: 'name', type: 'string', no: 3 },
+    { name: 'enabled', type: 'bool', no: 4 },
+    { name: 'createdAt', type: 'string', no: 5 },
+    { name: 'lastUsedAt', type: 'string', no: 6 },
+    { name: 'expiresAt', type: 'string', no: 7 },
+  ],
+};
+
+export const ListApiKeysResponseDef: MessageDef = {
+  fields: [{ name: 'keys', type: 'message', message: ApiKeyInfoDef, repeated: true, no: 1 }],
+};
+
+export const RevokeApiKeyRequestDef: MessageDef = {
+  fields: [{ name: 'id', type: 'string', no: 1 }],
+};
+
+export const RevokeApiKeyResponseDef: MessageDef = {
+  fields: [],
+};

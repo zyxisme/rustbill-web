@@ -18,7 +18,8 @@
     "gotoAdmin": "管理后台",
     "legal": "法律条款",
     "terms": "用户协议",
-    "privacy": "隐私政策"
+    "privacy": "隐私政策",
+    "apiKeys": "API Keys"
   },
   "common": {
     "save": "保存",
@@ -607,5 +608,30 @@
     "amount": "请输入有效金额",
     "numeric": "请输入数字",
     "url": "请输入有效的 URL"
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "description": "管理用于下游 RustBill 系统对接的 API Key。",
+    "create": "创建 API Key",
+    "keyName": "Key 名称",
+    "keyNamePlaceholder": "如：北京代理",
+    "newKeyNotice": "新 API Key（仅显示一次，请立即保存）",
+    "copyToClipboard": "复制到剪贴板",
+    "emptyTitle": "暂无 API Key",
+    "emptyDescription": "创建 API Key 后可用于下游 RustBill 系统对接",
+    "colName": "名称",
+    "colKey": "Key",
+    "colStatus": "状态",
+    "colCreatedAt": "创建时间",
+    "colLastUsed": "最近使用",
+    "colActions": "操作",
+    "statusEnabled": "启用",
+    "statusRevoked": "已吊销",
+    "revoke": "吊销",
+    "revokeConfirm": "确定吊销此 API Key？吊销后下游系统将无法连接。",
+    "permissionDenied": "您的账户暂未开通 API Key 权限，请联系管理员。",
+    "loadFailed": "加载失败: {{error}}",
+    "createFailed": "创建失败: {{error}}",
+    "revokeFailed": "吊销失败: {{error}}"
   }
 }

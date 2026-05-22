@@ -62,6 +62,12 @@ import {
   CreateReplyRequestDef,
   CreateReplyResponseDef,
   ListProvidersResponseDef,
+  CreateApiKeyRequestDef,
+  CreateApiKeyResponseDef,
+  ListApiKeysRequestDef,
+  ListApiKeysResponseDef,
+  RevokeApiKeyRequestDef,
+  RevokeApiKeyResponseDef,
 } from './proto-defs';
 
 // ── Config ──────────────────────────────────────────────────────
@@ -606,4 +612,56 @@ export interface BalanceTransactionInfo {
   referenceId: string;
   description: string;
   createdAt: string;
+}
+
+// ── ApiKeyService (downstream.proto) ───────────────────────────────
+
+export interface ApiKeyInfo {
+  id: string;
+  keyPrefix: string;
+  name: string;
+  enabled: boolean;
+  createdAt: string;
+  lastUsedAt: string;
+  expiresAt: string;
+}
+
+export async function createApiKey(name: string): Promise<{ apiKey: string; keyPrefix: string; id: string }> {
+  const response = await grpcCall(
+    'rustbill.downstream.ApiKeyService',
+    'CreateApiKey',
+    CreateApiKeyRequestDef,
+    CreateApiKeyResponseDef,
+    { name },
+  );
+  return { apiKey: (response.apiKey as string) || '', keyPrefix: (response.keyPrefix as string) || '', id: (response.id as string) || '' };
+}
+
+export async function listApiKeys(): Promise<ApiKeyInfo[]> {
+  const response = await grpcCall(
+    'rustbill.downstream.ApiKeyService',
+    'ListApiKeys',
+    ListApiKeysRequestDef,
+    ListApiKeysResponseDef,
+    {},
+  );
+  return ((response.keys || []) as any[]).map((k: any) => ({
+    id: (k.id as string) || '',
+    keyPrefix: (k.keyPrefix as string) || '',
+    name: (k.name as string) || '',
+    enabled: Boolean(k.enabled),
+    createdAt: (k.createdAt as string) || '',
+    lastUsedAt: (k.lastUsedAt as string) || '',
+    expiresAt: (k.expiresAt as string) || '',
+  }));
+}
+
+export async function revokeApiKey(id: string): Promise<void> {
+  await grpcCall(
+    'rustbill.downstream.ApiKeyService',
+    'RevokeApiKey',
+    RevokeApiKeyRequestDef,
+    RevokeApiKeyResponseDef,
+    { id },
+  );
 }
