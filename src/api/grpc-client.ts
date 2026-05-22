@@ -74,12 +74,63 @@ import {
 
 let grpcEndpoint = '';
 
+async function selectFastestEndpoint(endpoints: string[]): Promise<string> {
+  // Single endpoint: use directly, no need to ping
+  if (endpoints.length <= 1) {
+    return endpoints[0] || '';
+  }
+
+  const ping = (url: string): Promise<{ url: string; latency: number }> =>
+    new Promise((resolve, reject) => {
+      const start = performance.now();
+      const controller = new AbortController();
+      const timeout = setTimeout(() => {
+        controller.abort();
+        reject(new Error('timeout'));
+      }, 3000);
+
+      fetch(`${url}/health`, {
+        method: 'GET',
+        signal: controller.signal,
+        cache: 'no-cache',
+        // opaque for cross-origin (we only care about latency, not response body)
+        mode: 'cors',
+      })
+        .then(() => {
+          clearTimeout(timeout);
+          resolve({ url, latency: performance.now() - start });
+        })
+        .catch(() => {
+          clearTimeout(timeout);
+          reject(new Error('unreachable'));
+        });
+    });
+
+  const results = await Promise.allSettled(endpoints.map(ping));
+
+  let best: { url: string; latency: number } | null = null;
+  for (const r of results) {
+    if (r.status === 'fulfilled' && (best === null || r.value.latency < best.latency)) {
+      best = r.value;
+    }
+  }
+
+  // Fallback to first endpoint if all unreachable
+  return best ? best.url : endpoints[0];
+}
+
 export async function loadConfig(): Promise<void> {
   try {
     const resp = await fetch('/config.json', { cache: 'no-cache' });
     if (resp.ok) {
       const cfg = await resp.json();
-      grpcEndpoint = (cfg.grpcEndpoint as string) || '';
+      // Support both new `endpoints` array and legacy `grpcEndpoint` string
+      const endpoints: string[] | undefined = cfg.endpoints;
+      if (endpoints && endpoints.length > 0) {
+        grpcEndpoint = await selectFastestEndpoint(endpoints);
+      } else if (cfg.grpcEndpoint) {
+        grpcEndpoint = cfg.grpcEndpoint as string;
+      }
     }
   } catch {
     // Use default empty endpoint
