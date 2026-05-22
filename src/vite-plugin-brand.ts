@@ -199,6 +199,7 @@ const DEFAULT_BRAND: BrandConfig = {
       { i18n: 'nav.myInvoices', href: '/dashboard/invoices', icon: 'FileText' },
       { i18n: 'nav.myTickets', href: '/dashboard/tickets', icon: 'Ticket' },
       { i18n: 'nav.myBalance', href: '/dashboard/balance', icon: 'Wallet' },
+      { i18n: 'nav.apiKeys', href: '/dashboard/api-keys', icon: 'Key' },
       { i18n: 'nav.settings', href: '/dashboard/settings', icon: 'Settings' },
     ],
   },
