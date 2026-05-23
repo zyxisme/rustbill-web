@@ -314,8 +314,11 @@
   "catalog": {
     "title": "产品目录",
     "subtitle": "选择适合你的云服务方案",
+    "eyebrow": "云产品",
+    "searchPlaceholder": "搜索产品...",
     "noProducts": "暂无产品",
     "empty": "暂无可售产品",
+    "emptyHint": "当前无可售产品，请稍后再来或联系客服。",
     "other": "其他",
     "perMonth": "/月",
     "perQuarter": "/季",
@@ -325,7 +328,20 @@
     "buyNow": "立即购买",
     "learnMore": "了解详情",
     "specLabel": "{{label}}: {{value}}",
-    "groupAll": "全部产品"
+    "groupAll": "全部产品",
+    "errorLoading": "加载产品失败",
+    "retryLoading": "重新加载",
+    "categories": "商品分类",
+    "productsCount": "{{count}} 个商品",
+    "products": "产品列表",
+    "selectCategoryHint": "请选择左侧分类查看产品分组",
+    "selectCategoryHintDesc": "浏览我们的云产品分类，找到适合你的解决方案。",
+    "selectGroupHint": "请选择上方分组查看商品",
+    "selectGroupHintDesc": "选择一个产品分组，查看该分组下的所有可用商品。",
+    "noGroups": "此分类暂无产品分组",
+    "noProductsHint": "该分组下暂无可用商品，请稍后再来或联系客服。",
+    "noSearchResults": "未找到匹配的产品",
+    "noSearchResultsHint": "尝试调整搜索关键词或选择其他分组。"
   },
   "product": {
     "backToCatalog": "返回目录",

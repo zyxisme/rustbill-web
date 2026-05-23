@@ -330,7 +330,18 @@
     "specLabel": "{{label}}",
     "groupAll": "All Products",
     "errorLoading": "Failed to load products.",
-    "retryLoading": "Retry"
+    "retryLoading": "Retry",
+    "categories": "Categories",
+    "productsCount": "{{count}} products",
+    "products": "Products",
+    "selectCategoryHint": "Select a category to browse products",
+    "selectCategoryHintDesc": "Browse our cloud product categories to find the right solution for you.",
+    "selectGroupHint": "Select a group above to view products",
+    "selectGroupHintDesc": "Choose a product group to see all available products.",
+    "noGroups": "No product groups in this category",
+    "noProductsHint": "No products are currently available in this group. Check back later or contact support.",
+    "noSearchResults": "No matching products found",
+    "noSearchResultsHint": "Try adjusting your search keywords or selecting a different group."
   },
   "product": {
     "backToCatalog": "Back to Catalog",
