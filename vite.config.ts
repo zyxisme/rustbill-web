@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import vitePluginBrand from './src/vite-plugin-brand';
+import { vitePluginMarkdownHtml } from './src/vite-plugin-markdown-html';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), vitePluginBrand()],
+  plugins: [react(), tailwindcss(), vitePluginBrand(), vitePluginMarkdownHtml()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -51,3 +51,8 @@ declare module 'virtual:brand' {
 
   export type { NavItem, LogoConfig, BrandConfig, Cluster };
 }
+
+declare module '*.md?html' {
+  const html: string;
+  export default html;
+}
