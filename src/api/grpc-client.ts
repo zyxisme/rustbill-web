@@ -28,6 +28,13 @@ import {
   GetProductResponseDef,
   ListProductGroupsRequestDef,
   ListProductGroupsResponseDef,
+  CreateProductCategoryRequestDef,
+  ListProductCategoriesRequestDef,
+  ListProductCategoriesResponseDef,
+  GetProductCategoryRequestDef,
+  GetProductCategoryResponseDef,
+  UpdateProductCategoryRequestDef,
+  DeleteProductCategoryRequestDef,
   ListGatewaysResponseDef,
   CreateOrderRequestDef,
   CreateOrderResponseDef,
@@ -406,6 +413,67 @@ export const api = {
     );
   },
 
+  // Product Categories
+  listProductCategories(page = 1, pageSize = 50) {
+    return grpcCall(
+      'rustbill.product.ProductCategoryService',
+      'ListProductCategories',
+      ListProductCategoriesRequestDef,
+      ListProductCategoriesResponseDef,
+      { pagination: { page, pageSize } },
+    );
+  },
+
+  getProductCategory(id: string) {
+    return grpcCall(
+      'rustbill.product.ProductCategoryService',
+      'GetProductCategory',
+      GetProductCategoryRequestDef,
+      GetProductCategoryResponseDef,
+      { id },
+    );
+  },
+
+  createProductCategory(name: string, description: string, sortOrder: number) {
+    return grpcCall(
+      'rustbill.product.ProductCategoryService',
+      'CreateProductCategory',
+      CreateProductCategoryRequestDef,
+      GetProductCategoryResponseDef,
+      { name, description, sortOrder },
+    );
+  },
+
+  updateProductCategory(id: string, updates: Record<string, unknown>) {
+    return grpcCall(
+      'rustbill.product.ProductCategoryService',
+      'UpdateProductCategory',
+      UpdateProductCategoryRequestDef,
+      GetProductCategoryResponseDef,
+      { id, ...updates },
+    );
+  },
+
+  deleteProductCategory(id: string) {
+    return grpcCall(
+      'rustbill.product.ProductCategoryService',
+      'DeleteProductCategory',
+      DeleteProductCategoryRequestDef,
+      { fields: [] },
+      { id },
+    );
+  },
+
+  listProductGroupsByCategory(categoryId: string) {
+    return grpcCall(
+      'rustbill.product.ProductGroupService',
+      'ListProductGroups',
+      ListProductGroupsRequestDef,
+      ListProductGroupsResponseDef,
+      { categoryId },
+    );
+  },
+
   // Integration
   listProviders() {
     return grpcCall(
@@ -663,6 +731,16 @@ export interface BalanceTransactionInfo {
   referenceId: string;
   description: string;
   createdAt: string;
+}
+
+export interface ProductCategoryInfo {
+  id: string;
+  name: string;
+  description: string;
+  sortOrder: number;
+  groupCount: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // ── ApiKeyService (downstream.proto) ───────────────────────────────

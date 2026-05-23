@@ -208,11 +208,15 @@ export const ProductGroupInfoDef: MessageDef = {
     { no: 5, name: 'productCount', type: 'uint32' },
     { no: 6, name: 'createdAt', type: 'string' },
     { no: 7, name: 'updatedAt', type: 'string' },
+    { no: 8, name: 'categoryId', type: 'string' },
   ],
 };
 
 export const ListProductGroupsRequestDef: MessageDef = {
-  fields: [{ no: 1, name: 'pagination', type: 'message', message: PageRequestDef }],
+  fields: [
+    { no: 1, name: 'pagination', type: 'message', message: PageRequestDef },
+    { no: 2, name: 'categoryId', type: 'string' },
+  ],
 };
 
 export const ListProductGroupsResponseDef: MessageDef = {
@@ -220,6 +224,62 @@ export const ListProductGroupsResponseDef: MessageDef = {
     { no: 1, name: 'groups', type: 'message', message: ProductGroupInfoDef, repeated: true },
     { no: 2, name: 'meta', type: 'message', message: PageMetaDef },
   ],
+};
+
+// ── product_category.proto ────────────────────────────────────
+
+export const ProductCategoryInfoDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'id', type: 'string' },
+    { no: 2, name: 'name', type: 'string' },
+    { no: 3, name: 'description', type: 'string' },
+    { no: 4, name: 'sortOrder', type: 'int32' },
+    { no: 5, name: 'groupCount', type: 'uint32' },
+    { no: 6, name: 'createdAt', type: 'string' },
+    { no: 7, name: 'updatedAt', type: 'string' },
+  ],
+};
+
+export const CreateProductCategoryRequestDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'name', type: 'string' },
+    { no: 2, name: 'description', type: 'string' },
+    { no: 3, name: 'sortOrder', type: 'int32' },
+  ],
+};
+
+export const ListProductCategoriesRequestDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'pagination', type: 'message', message: PageRequestDef },
+  ],
+};
+
+export const ListProductCategoriesResponseDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'categories', type: 'message', message: ProductCategoryInfoDef, repeated: true },
+    { no: 2, name: 'meta', type: 'message', message: PageMetaDef },
+  ],
+};
+
+export const GetProductCategoryRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
+};
+
+export const GetProductCategoryResponseDef: MessageDef = {
+  fields: [{ no: 1, name: 'category', type: 'message', message: ProductCategoryInfoDef }],
+};
+
+export const UpdateProductCategoryRequestDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'id', type: 'string' },
+    { no: 2, name: 'name', type: 'string' },
+    { no: 3, name: 'description', type: 'string' },
+    { no: 4, name: 'sortOrder', type: 'int32' },
+  ],
+};
+
+export const DeleteProductCategoryRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
 };
 
 // ── order.proto ───────────────────────────────────────────────
