@@ -27,7 +27,7 @@ import {
 import { api } from '@/api/grpc-client';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { LazyMarkdown } from '@/components/LazyMarkdown';
+import { SafeHtml } from '@/components/SafeHtml';
 
 // ── Types ──
 
@@ -511,30 +511,14 @@ export default function ProductDetail() {
                 </CardContent>
               )}
 
-              {/* Markdown description */}
+              {/* HTML description */}
               {product.description && product.description.length > 100 && (
                 <CardContent className="pt-0">
                   <Separator className="mb-4" />
                   <h4 className="text-sm font-semibold text-ink mb-3">
                     {t('product.productDescription')}
                   </h4>
-                <LazyMarkdown
-                  className="text-body text-sm leading-relaxed space-y-3 max-w-none
-                    [&_h1]:text-ink [&_h1]:font-semibold [&_h1]:text-lg
-                    [&_h2]:text-ink [&_h2]:font-semibold [&_h2]:text-base
-                    [&_h3]:text-ink [&_h3]:font-semibold [&_h3]:text-sm
-                    [&_p]:leading-relaxed [&_ul]:pl-4 [&_ol]:pl-4
-                    [&_code]:bg-canvas [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-xs [&_code]:text-xs [&_code]:font-mono [&_code]:text-primary
-                    [&_pre]:bg-canvas [&_pre]:p-4 [&_pre]:rounded-sm [&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-hairline
-                    [&_pre_code]:bg-transparent [&_pre_code]:p-0
-                    [&_a]:text-link [&_a]:hover:underline
-                    [&_table]:w-full [&_th]:text-left [&_th]:text-xs [&_th]:text-mute [&_th]:font-medium [&_th]:py-2 [&_th]:px-3 [&_td]:py-2 [&_td]:px-3 [&_td]:text-sm
-                    [&_tr]:border-b [&_tr]:border-hairline
-                    [&_blockquote]:border-l-2 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:text-mute
-                    [&_hr]:border-hairline"
-                >
-                  {product.description}
-                </LazyMarkdown>
+                  <SafeHtml html={product.description} className="product-html-content" />
                 </CardContent>
               )}
             </Card>
