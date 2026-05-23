@@ -25,7 +25,7 @@ const DOMPURIFY_CONFIG = {
     'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td',
     'code', 'pre', 'blockquote', 'hr', 'br',
     'strong', 'em', 'b', 'i',
-    'span', 'details', 'summary',
+    'span', 'details', 'summary', 'h5', 'h6',
   ],
   ALLOWED_ATTR: [
     'class', 'style', 'href', 'target', 'rel',
