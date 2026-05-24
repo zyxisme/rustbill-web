@@ -239,9 +239,10 @@ export async function tryRefreshToken(): Promise<boolean> {
     const data = decodeMessage(RefreshTokenResponseDef, msgBytes);
     const accessToken = data.accessToken as string;
     const expiresIn = data.expiresIn ? Number(data.expiresIn) : undefined;
+    const newRefreshToken = (data.refreshToken as string) || rt;
 
     if (accessToken) {
-      setTokens(accessToken, rt, expiresIn);
+      setTokens(accessToken, newRefreshToken, expiresIn);
       return true;
     }
     return false;

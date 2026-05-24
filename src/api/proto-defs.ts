@@ -99,6 +99,7 @@ export const RefreshTokenResponseDef: MessageDef = {
   fields: [
     { no: 1, name: 'accessToken', type: 'string' },
     { no: 2, name: 'expiresIn', type: 'int64' },
+    { no: 3, name: 'refreshToken', type: 'string' },
   ],
 };
 
