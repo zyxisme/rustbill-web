@@ -134,6 +134,25 @@ export const ChangePasswordResponseDef: MessageDef = {
 
 // ── product.proto ─────────────────────────────────────────────
 
+export const SpecOptionDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'value', type: 'string' },
+    { no: 2, name: 'label', type: 'string' },
+    { no: 3, name: 'icon', type: 'string' },
+    { no: 4, name: 'description', type: 'string' },
+    { no: 5, name: 'priceModifier', type: 'string' },
+    { no: 6, name: 'disabled', type: 'bool' },
+  ],
+};
+
+export const PriceImpactDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'mode', type: 'string' },
+    { no: 2, name: 'amount', type: 'string' },
+    { no: 3, name: 'currency', type: 'string' },
+  ],
+};
+
 export const SpecFieldDef: MessageDef = {
   fields: [
     { no: 1, name: 'key', type: 'string' },
@@ -141,16 +160,33 @@ export const SpecFieldDef: MessageDef = {
     { no: 3, name: 'fieldType', type: 'string' },
     { no: 4, name: 'required', type: 'bool' },
     { no: 5, name: 'displayOrder', type: 'uint32' },
-    { no: 6, name: 'options', type: 'string', repeated: true },
+    { no: 6, name: 'options', type: 'message', message: SpecOptionDef, repeated: true },
     { no: 7, name: 'min', type: 'int64' },
     { no: 8, name: 'max', type: 'int64' },
     { no: 9, name: 'defaultValue', type: 'string' },
+    { no: 10, name: 'unit', type: 'string' },
+    { no: 11, name: 'description', type: 'string' },
+    { no: 12, name: 'icon', type: 'string' },
+    { no: 13, name: 'group', type: 'string' },
+    { no: 14, name: 'step', type: 'int64' },
+    { no: 15, name: 'priceImpact', type: 'message', message: PriceImpactDef },
+  ],
+};
+
+export const SpecGroupDef: MessageDef = {
+  fields: [
+    { no: 1, name: 'key', type: 'string' },
+    { no: 2, name: 'label', type: 'string' },
+    { no: 3, name: 'icon', type: 'string' },
+    { no: 4, name: 'displayOrder', type: 'uint32' },
+    { no: 5, name: 'fields', type: 'message', message: SpecFieldDef, repeated: true },
   ],
 };
 
 export const SpecTemplateDef: MessageDef = {
   fields: [
     { no: 1, name: 'fields', type: 'message', message: SpecFieldDef, repeated: true },
+    { no: 2, name: 'groups', type: 'message', message: SpecGroupDef, repeated: true },
   ],
 };
 
