@@ -59,7 +59,7 @@ export function productDetailSEO(name: string, summary: string): SEOMeta {
 export function termsSEO(): SEOMeta {
   return {
     title: `用户服务协议 — ${brandName}`,
-    description: '',
+    description: `${brandName} 用户服务协议，包含服务条款、用户权利与义务、隐私保护及免责声明等内容。`,
     ogType: 'website',
   };
 }
@@ -67,7 +67,7 @@ export function termsSEO(): SEOMeta {
 export function privacySEO(): SEOMeta {
   return {
     title: `隐私政策 — ${brandName}`,
-    description: '',
+    description: `${brandName} 隐私政策，包含用户信息收集、数据使用、信息存储及用户权利等隐私保护条款。`,
     ogType: 'website',
   };
 }
