@@ -6,7 +6,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vike build",
+    "build": "tsc -b && vike build && npm run gen-sitemap",
     "gen-map-data": "node scripts/gen-map-data.mjs",
     "gen-sitemap": "node scripts/gen-sitemap.mjs",
     "lint": "eslint .",
