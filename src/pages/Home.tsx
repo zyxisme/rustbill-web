@@ -8,6 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import HomeHero from '@/components/HomeHero';
 import { LazyTerminal } from '@/components/LazyTerminal';
 import LazyWorldMap from '@/components/LazyWorldMap';
 
@@ -91,6 +92,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col animate-in fade-in-0 duration-300">
+      <HomeHero />
+
       {/* ═══════════════════════════════════════════════════════
           TRUSTED BY
           ═══════════════════════════════════════════════════════ */}
