@@ -31,7 +31,8 @@
 - **品牌定制** — `brand.yaml` 驱动从 accent 色自动推导 34 色调色板，全站 CSS 变量注入
 - **点阵世界地图** — dotted-map SVG 懒加载，6 个集群节点可视化
 - **响应式布局** — 移动端 sidebar overlay + 汉堡菜单 + 表格自适应 + iOS 安全区
-- **性能优化** — 路由级代码分离 + vendor chunk 缓存 + 字体 CSS 异步 + locale 懒加载
+- **Vike SSG** — 静态站点生成，3 页面构建时渲染完整 HTML，自带 SEO meta 标签
+- **SEO 完整** — 静态 `<title>`/`<meta description>`/OG/Twitter Card/JSON-LD 结构化数据 + sitemap
 - **自定义动画** — 纯 CSS shimmer / 骨架屏 / 滚动入场 / 交错列表 / 页面过渡
 - **法律条款** — Terms / Privacy 页面，Markdown 编译时嵌入，双语版本
 
@@ -44,7 +45,7 @@
 | 构建 | Vite 8 |
 | UI 原语 | Radix UI (13 个无样式行为组件) |
 | 样式 | Tailwind CSS 4 + CVA |
-| 路由 | React Router 7 |
+| 路由 | Vike (文件系统 SSG) + React Router 7 (Dashboard 内部) |
 | 状态管理 | Zustand 5 |
 | 图标 | Lucide React |
 | 国际化 | i18next + react-i18next |
@@ -58,6 +59,35 @@
 
 ```
 web-consumer/
+├── pages/                    # Vike 文件系统路由 (SSG)
+│   ├── +config.ts            #   全局 Vike 配置 (extends vikeReact)
+│   ├── +Layout.tsx           #   根布局 (HelmetProvider + i18n + ErrorBoundary)
+│   ├── +client.ts            #   客户端入口 (字体异步加载)
+│   ├── index/
+│   │   ├── +Page.tsx         #   主页 → "/" (SSG, 完整静态 HTML)
+│   │   ├── +Head.tsx         #   SEO meta (title/description/OG/JSON-LD)
+│   │   └── +config.ts        #   prerender: true
+│   ├── catalog/
+│   │   ├── +Page.tsx         #   产品目录 → "/catalog" (CSR + helmet)
+│   │   └── @id/
+│   │       ├── +Page.tsx     #   产品详情 → "/catalog/:id" (CSR + helmet)
+│   │       └── +config.ts    #   prerender: false
+│   ├── login/
+│   │   └── +Page.tsx         #   登录 → "/login" (CSR)
+│   ├── register/
+│   │   └── +Page.tsx         #   注册 → "/register" (CSR)
+│   ├── legal/
+│   │   ├── terms/
+│   │   │   ├── +Page.tsx     #   用户协议 → "/legal/terms" (SSG)
+│   │   │   ├── +Head.tsx     #   SEO meta
+│   │   │   └── +config.ts    #   prerender: true
+│   │   └── privacy/
+│   │       ├── +Page.tsx     #   隐私政策 → "/legal/privacy" (SSG)
+│   │       ├── +Head.tsx     #   SEO meta
+│   │       └── +config.ts    #   prerender: true
+│   └── dashboard/
+│       ├── +Page.tsx         #   Dashboard shell (CSR, 内部 react-router)
+│       └── +config.ts        #   ssr: false, prerender: true
 ├── src/
 │   ├── api/                  # gRPC-Web 客户端层
 │   │   ├── grpc-client.ts    #   JWT 管理 + 自动刷新 + 跨域 preconnect
@@ -65,6 +95,7 @@ web-consumer/
 │   │   └── proto-defs.ts     #   MessageDef 定义 (与 .proto 同步)
 │   ├── components/
 │   │   ├── ui/               #   shadcn/ui 组件 (19 个)
+│   │   ├── DashboardApp.tsx  #   Dashboard SPA (BrowserRouter + 11 子路由)
 │   │   ├── PageLoader.tsx    #   品牌 Logo 脉冲 + 微光进度条
 │   │   ├── LazyWorldMap.tsx  #   点阵世界地图 (IntersectionObserver)
 │   │   ├── LazyTerminal.tsx  #   终端展示组件 (懒加载)
@@ -89,6 +120,8 @@ web-consumer/
 │   │   └── DashboardLayout.tsx # 侧边栏 (240px) + 内容
 │   ├── stores/
 │   │   └── auth.ts           #   Zustand auth store (单一职责)
+│   ├── seo.ts                #   SEO meta 工厂函数
+│   ├── i18n-server.ts        #   SSR 安全 i18n (构建时无 browser detector)
 │   ├── locales/
 │   │   ├── zh-CN/            #   ~350 键
 │   │   └── en-US/            #   ~350 键
@@ -99,10 +132,12 @@ web-consumer/
 │   └── i18n.ts               #   i18next 初始化 + 当前语言懒加载
 ├── public/
 │   ├── favicon.svg
+│   ├── robots.txt            #   爬虫规则 + sitemap 指向
 │   └── config.json           #   运行时配置 (gRPC endpoint / 标题)
-├── brand.yaml                #   品牌配置 (名称/Logo/导航/颜色/集群)
 ├── scripts/
-│   └── gen-map-data.mjs      #   地图坐标数据生成
+│   ├── gen-map-data.mjs      #   地图坐标数据生成
+│   └── gen-sitemap.mjs       #   sitemap.xml 生成
+├── brand.yaml                #   品牌配置 (名称/Logo/导航/颜色/集群)
 ├── vite.config.ts
 └── package.json
 ```
@@ -151,14 +186,33 @@ npm run dev
 # TypeScript 类型检查
 npx tsc -p tsconfig.app.json --noEmit
 
-# 生产构建
+# 生产构建 (TS 检查 + Vike SSG 预渲染)
 npm run build
 
 # 预览生产构建
 npm run preview
+
+# 生成 sitemap (替换 SITE_URL 为实际域名)
+SITE_URL=https://example.com npm run gen-sitemap
 ```
 
 开发服务器自动代理 gRPC 请求到 `localhost:50051`。确保后端 `rustbill-server` 已启动。
+
+### 构建输出
+
+`npm run build` 生成 `dist/client/`，每个路由一个 HTML 文件：
+
+```
+dist/client/
+├── index.html              # Home — 完整静态 HTML + SEO meta
+├── catalog/index.html      # Catalog — CSR shell
+├── login/index.html        # Login — CSR
+├── register/index.html     # Register — CSR
+├── dashboard/index.html    # Dashboard shell (内部 react-router)
+└── legal/
+    ├── terms/index.html    # Terms — 完整静态 HTML
+    └── privacy/index.html  # Privacy — 完整静态 HTML
+```
 
 ## 运行时配置
 
@@ -221,22 +275,35 @@ clusters:
 
 ## 部署
 
-### 静态文件服务 (推荐)
+`npm run build` 输出静态文件到 `dist/client/`，部署到任意静态文件服务。
 
-```bash
-npm run build
-# dist/ 目录即为完整 SPA，部署到任意静态文件服务
-```
+每个路由有独立的 HTML 文件（非 SPA 单 index.html），因此无需全局 `try_files` 回退。**例外**：Dashboard 子路由（`/dashboard/orders` 等）由内部 react-router 处理，需要 SPA fallback。
 
 ### Caddy
 
 ```caddy
 example.com {
     root * /var/www/rustbill-consumer
+
+    # Dashboard SPA fallback — 子路由由内部 react-router 处理
+    handle /dashboard/* {
+        try_files {path} /dashboard/index.html
+        file_server
+    }
+
+    # 其他路由：直接 serve 对应的 HTML 文件
     file_server
 
+    # gRPC-Web 反向代理
     handle /rustbill.* {
-        reverse_proxy localhost:50051
+        reverse_proxy h2c://127.0.0.1:50051
+    }
+
+    # Security headers
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
 }
 ```
@@ -247,17 +314,24 @@ example.com {
 server {
     root /var/www/rustbill-consumer;
 
-    location / {
-        try_files $uri /index.html;
+    # gRPC-Web 反向代理（优先级最高）
+    location /rustbill. {
+        grpc_pass grpc://127.0.0.1:50051;
     }
 
-    location /rustbill. {
-        grpc_pass localhost:50051;
+    # Dashboard SPA fallback
+    location /dashboard {
+        try_files $uri /dashboard/index.html;
+    }
+
+    # 其他路由：直接 serve HTML 文件
+    location / {
+        try_files $uri $uri.html $uri/index.html =404;
     }
 }
 ```
 
-> gRPC-Web 请求路径形如 `/rustbill.{service}/{method}`，需反向代理转发到后端。
+> **为什么不用全局 `try_files /index.html`？** Vike SSG 为每个路由生成独立的 HTML 文件，不存在统一的 `index.html` 入口。只有 Dashboard 因内部使用 react-router 做子路由，需要 fallback。
 
 ## 设计系统
 
