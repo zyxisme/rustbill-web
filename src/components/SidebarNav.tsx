@@ -1,4 +1,3 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { navLabel } from '@/components/NavMenu';
@@ -14,7 +13,7 @@ function SidebarIcon({ name }: { name?: string }) {
 
 export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => void }) {
   const { t } = useTranslation();
-  const location = useLocation();
+  const pathname = window.location.pathname;
 
   if (!items || items.length === 0) return null;
 
@@ -22,7 +21,7 @@ export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; on
     <>
       {items.map((item) => {
         const label = navLabel(t, item);
-        const isActive = item.href && location.pathname === item.href;
+        const isActive = item.href && pathname === item.href;
 
         if (item.children && item.children.length > 0) {
           return (
@@ -33,11 +32,11 @@ export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; on
               </div>
               {item.children.map((child: NavItem) => {
                 const childLabel = navLabel(t, child);
-                const childActive = child.href && location.pathname === child.href;
+                const childActive = child.href && pathname === child.href;
                 return (
-                  <Link
+                  <a
                     key={child.i18n || child.label}
-                    to={child.href || '#'}
+                    href={child.href || '#'}
                     onClick={onNavigate}
                     className={cn(
                       'flex items-center gap-3 pl-8 pr-3 py-2 text-sm rounded-sm no-underline transition-colors',
@@ -47,7 +46,7 @@ export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; on
                     )}
                   >
                     <span>{childLabel}</span>
-                  </Link>
+                  </a>
                 );
               })}
             </div>
@@ -55,9 +54,9 @@ export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; on
         }
 
         return (
-          <Link
+          <a
             key={item.i18n || item.label}
-            to={item.href || '#'}
+            href={item.href || '#'}
             onClick={onNavigate}
             className={cn(
               'flex items-center gap-3 px-3 py-2 text-sm rounded-sm no-underline transition-colors',
@@ -68,7 +67,7 @@ export default function SidebarNav({ items, onNavigate }: { items: NavItem[]; on
           >
             <SidebarIcon name={item.icon} />
             <span>{label}</span>
-          </Link>
+          </a>
         );
       })}
     </>

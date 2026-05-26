@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AlertCircle, Loader2, Eye, EyeOff, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,6 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function Register() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { toast } = useToast();
   const { user, loading: authLoading, error: storeError, register, sendVerificationCode, clearError } = useAuthStore();
 
@@ -32,9 +30,9 @@ export default function Register() {
   // If already logged in, redirect to dashboard
   useEffect(() => {
     if (!authLoading && user) {
-      navigate('/dashboard', { replace: true });
+      window.location.href = '/dashboard';
     }
-  }, [user, authLoading, navigate]);
+  }, [user, authLoading]);
 
   useEffect(() => {
     if (storeError) {
@@ -125,7 +123,7 @@ export default function Register() {
         title: t('auth.registerSuccess'),
         variant: 'success',
       });
-      navigate('/login', { replace: true });
+      window.location.href = '/login';
     } catch {
       // Error is set in the store and picked up by the useEffect
     } finally {
@@ -143,14 +141,14 @@ export default function Register() {
         <div className="bg-canvas-soft-2 rounded-lg border border-hairline p-8 shadow-[0_0_20px_rgba(0,209,167,0.04)]">
           {/* Logo + Title */}
           <div className="text-center mb-6">
-            <Link to="/" className="inline-flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline mb-4">
+            <a href="/" className="inline-flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline mb-4">
               <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="6" fill="#090c10" />
                 <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#00d1a7" strokeWidth="1.5" fill="none" />
                 <circle cx="16" cy="17" r="3" fill="#00d1a7" />
               </svg>
               RustBill
-            </Link>
+            </a>
             <h1 className="text-xl font-semibold text-ink tracking-tight">
               {t('auth.registerTitle')}
             </h1>
@@ -340,12 +338,12 @@ export default function Register() {
           {/* Login link */}
           <p className="text-center text-sm text-body">
             {t('auth.hasAccount')}{' '}
-            <Link
-              to="/login"
+            <a
+              href="/login"
               className="text-link hover:underline font-medium no-underline"
             >
               {t('auth.goLogin')}
-            </Link>
+            </a>
           </p>
         </div>
       </div>

@@ -116,8 +116,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link
-            to="/"
+          <a
+            href="/"
             className="flex items-center gap-1 text-sm text-body hover:text-ink transition-colors no-underline"
           >
             <ChevronLeft className="h-4 w-4" />

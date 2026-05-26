@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Server, Shield, Zap, ArrowRight, Check, Globe, Cpu,
@@ -231,7 +230,7 @@ export default function Home() {
             {productCategories.map((p) => {
               const Icon = p.icon;
               return (
-                <Link to="/catalog" key={p.titleKey} className="no-underline group">
+                <a href="/catalog" key={p.titleKey} className="no-underline group">
                   <div className="bg-canvas-soft rounded-lg border border-hairline p-6 hover:shadow-[0_0_30px_rgba(0,209,167,0.08)] hover:border-primary/30 transition-all duration-200 flex items-start gap-4">
                     <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-canvas-soft-2 border border-hairline shrink-0 group-hover:bg-cyan-soft group-hover:border-primary/30 transition-colors">
                       <Icon className={cn('h-6 w-6', p.color)} />
@@ -241,7 +240,7 @@ export default function Home() {
                       <p className="mt-1 text-sm text-body">{t(p.descKey)}</p>
                     </div>
                   </div>
-                </Link>
+                </a>
               );
             })}
           </div>
@@ -262,9 +261,9 @@ export default function Home() {
                 {t('home.showcaseSubtitle')}
               </p>
               <div className="mt-6 flex items-center gap-4">
-                <Link to="/register" className="no-underline">
+                <a href="/register" className="no-underline">
                   <Button variant="primary" size="pill">{t('home.heroCTA')}</Button>
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -340,7 +339,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <Link to={tier.href} className="no-underline">
+                  <a href={tier.href} className="no-underline">
                     <Button
                       variant={tier.featured ? 'secondary' : 'outline'}
                       size="pill"
@@ -348,7 +347,7 @@ export default function Home() {
                     >
                       {t(tier.cta)}
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}
@@ -428,17 +427,17 @@ export default function Home() {
               {t('home.bottomCTASubtitle')}
             </p>
             <div className="mt-8 flex items-center gap-3 justify-center flex-wrap">
-              <Link to="/register" className="no-underline">
+              <a href="/register" className="no-underline">
                 <Button variant="primary" size="pill" className="text-base px-10 h-13">
                   {t('home.bottomCTAButton')}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Button>
-              </Link>
-              <Link to="/dashboard/tickets" className="no-underline">
+              </a>
+              <a href="/dashboard/tickets" className="no-underline">
                 <Button variant="outline" size="pill" className="text-base px-10 h-13">
                   {t('home.bottomCTASecondary')}
                 </Button>
-              </Link>
+              </a>
             </div>
             <p className="mt-5 text-xs text-mute">
               {t('home.faq6A')}

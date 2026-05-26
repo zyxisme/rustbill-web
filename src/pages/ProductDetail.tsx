@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
+import { brandName } from 'virtual:brand';
+import { usePageContext } from 'vike-react/usePageContext';
 
 import {
   ArrowLeft,
@@ -88,9 +90,9 @@ const CYCLE_LABELS: Record<string, string> = {
 };
 
 export default function ProductDetail() {
-  const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const pageContext = usePageContext();
+  const id = pageContext.routeParams?.id as string | undefined;
   const { toast } = useToast();
 
   // Data state
@@ -250,7 +252,7 @@ export default function ProductDetail() {
           description: t('product.orderSuccessDesc'),
         });
         // Navigate to orders list
-        setTimeout(() => navigate('/dashboard/orders'), 1500);
+        setTimeout(() => { window.location.href = '/dashboard/orders'; }, 1500);
       }
     } catch (err) {
       setOrderError(err instanceof Error ? err.message : t('product.orderFailed'));
@@ -385,11 +387,11 @@ export default function ProductDetail() {
               {t('product.notFound')}
             </h3>
             <p className="text-body text-sm mb-6">{t('product.notFoundDesc')}</p>
-            <Link to="/catalog" className="no-underline">
+            <a href="/catalog" className="no-underline">
               <Button variant="primary" size="md">
                 {t('product.backToCatalogLink')}
               </Button>
-            </Link>
+            </a>
           </CardContent>
         </Card>
       </div>
@@ -456,16 +458,23 @@ export default function ProductDetail() {
 
   // ── Ready state ──
   return (
-    <div className="min-h-screen bg-canvas pb-16 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
+    <>
+      {product && (
+        <Helmet>
+          <title>{product.name} — {brandName}</title>
+          <meta name="description" content={product.description?.slice(0, 160) || ''} />
+        </Helmet>
+      )}
+      <div className="min-h-screen bg-canvas pb-16 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 py-8">
         {/* Back link */}
-        <Link
-          to="/catalog"
+        <a
+          href="/catalog"
           className="inline-flex items-center gap-1.5 text-sm text-body hover:text-ink transition-colors no-underline mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
           {t('product.backToCatalog')}
-        </Link>
+        </a>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left: Product info */}
@@ -765,5 +774,6 @@ export default function ProductDetail() {
         </div>
       </div>
     </div>
+    </>
   );
 }

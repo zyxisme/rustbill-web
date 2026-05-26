@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
+import { brandName } from 'virtual:brand';
 import { Search, Package, RefreshCw, Layers, Grid3X3 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -72,11 +73,29 @@ function renderBillingCycleSuffix(
   return null;
 }
 
+// ── URL query params hook ──
+
+function useQueryParams() {
+  const [params, setParams] = useState(() => new URLSearchParams(window.location.search));
+  useEffect(() => {
+    const handler = () => setParams(new URLSearchParams(window.location.search));
+    window.addEventListener('popstate', handler);
+    return () => window.removeEventListener('popstate', handler);
+  }, []);
+  const setQuery = (key: string, value: string) => {
+    const next = new URLSearchParams(window.location.search);
+    if (value) next.set(key, value); else next.delete(key);
+    window.history.pushState(null, '', `?${next.toString()}`);
+    setParams(next);
+  };
+  return [params, setQuery] as const;
+}
+
 // ── Component ──
 
 export default function Catalog() {
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useQueryParams();
 
   // Data
   const [categories, setCategories] = useState<ProductCategoryInfo[]>([]);
@@ -106,12 +125,12 @@ export default function Catalog() {
 
   const syncUrl = useCallback(
     (categoryId: string, groupId: string) => {
-      const params = new URLSearchParams();
-      if (categoryId) params.set('category', categoryId);
-      if (groupId) params.set('group', groupId);
-      setSearchParams(params, { replace: true });
+      const next = new URLSearchParams();
+      if (categoryId) next.set('category', categoryId);
+      if (groupId) next.set('group', groupId);
+      window.history.replaceState(null, '', `?${next.toString()}`);
     },
-    [setSearchParams],
+    [],
   );
 
   // ── Load categories on mount ──
@@ -304,7 +323,12 @@ export default function Catalog() {
   // ── Ready state ──
 
   return (
-    <div className="min-h-screen bg-canvas animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
+    <>
+      <Helmet>
+        <title>云服务器产品 — {brandName}</title>
+        <meta name="description" content="浏览全部云服务器产品，按需选择配置和计费周期。" />
+      </Helmet>
+      <div className="min-h-screen bg-canvas animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
       {/* Page header */}
       <div className="bg-canvas-soft border-b border-hairline">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 py-6 sm:py-8">
@@ -616,14 +640,14 @@ export default function Catalog() {
                                 </span>
                               )}
                             </div>
-                            <Link
-                              to={`/catalog/${product.id}`}
+                            <a
+                              href={`/catalog/${product.id}`}
                               className="no-underline"
                             >
                               <Button variant="primary" size="sm">
                                 {t('catalog.buyNow')}
                               </Button>
-                            </Link>
+                            </a>
                           </div>
                         </CardContent>
                       </Card>
@@ -636,5 +660,6 @@ export default function Catalog() {
         </main>
       </div>
     </div>
+    </>
   );
 }
