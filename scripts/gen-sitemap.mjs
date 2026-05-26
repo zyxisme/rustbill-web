@@ -1,9 +1,16 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import YAML from 'yaml';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const baseUrl = process.env.SITE_URL || 'https://rb.monesy.cn';
+const outDir = join(__dirname, '..', 'dist', 'client');
+
+const brandPath = join(__dirname, '..', 'brand.yaml');
+const brand = existsSync(brandPath)
+  ? YAML.parse(readFileSync(brandPath, 'utf-8'))
+  : {};
+const baseUrl = process.env.SITE_URL || brand.siteUrl || 'https://rb.monesy.cn';
 const today = new Date().toISOString().split('T')[0];
 
 const urls = [
@@ -23,6 +30,11 @@ ${urls.map(({ loc, priority, changefreq }) => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-const outDir = join(__dirname, '..', 'dist', 'client');
 writeFileSync(join(outDir, 'sitemap.xml'), xml);
 console.log('sitemap.xml generated');
+
+writeFileSync(join(outDir, 'robots.txt'), `User-agent: *
+Allow: /
+Sitemap: ${baseUrl}/sitemap.xml
+`);
+console.log('robots.txt generated');

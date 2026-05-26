@@ -5,6 +5,7 @@
 brandName: "RustBill"
 tagline: "高性能云计算平台"
 accent: "#00d1a7"
+siteUrl: "https://rb.monesy.cn"
 
 colors:
   success: "#00d1a7"
