@@ -3,7 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import zhCN from '@/locales/zh-CN/translation.json';
-import enUS from '@/locales/en-US/translation.json';
+
+const loaded = new Set<string>(['zh-CN']);
 
 i18n
   .use(LanguageDetector)
@@ -11,7 +12,6 @@ i18n
   .init({
     resources: {
       'zh-CN': { translation: zhCN },
-      'en-US': { translation: enUS },
     },
     fallbackLng: 'zh-CN',
     supportedLngs: ['zh-CN', 'en-US'],
@@ -26,7 +26,21 @@ i18n
     },
   });
 
+if (i18n.language?.startsWith('en')) {
+  import('@/locales/en-US/translation.json').then(mod => {
+    i18n.addResourceBundle('en-US', 'translation', mod.default);
+    loaded.add('en-US');
+  });
+}
+
 export async function switchLanguage(lng: 'zh-CN' | 'en-US') {
+  if (!loaded.has(lng)) {
+    if (lng === 'en-US') {
+      const mod = await import('@/locales/en-US/translation.json');
+      i18n.addResourceBundle('en-US', 'translation', mod.default);
+      loaded.add('en-US');
+    }
+  }
   await i18n.changeLanguage(lng);
 }
 
