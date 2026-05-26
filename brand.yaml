@@ -6,6 +6,9 @@ brandName: "RustBill"
 tagline: "高性能云计算平台"
 accent: "#00d1a7"
 
+colors:
+  success: "#00d1a7"
+
 logo:
   type: "svg"
   svg: |
