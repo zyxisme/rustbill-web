@@ -442,9 +442,6 @@ export default function Home() {
                 </Button>
               </a>
             </div>
-            <p className="mt-5 text-xs text-mute">
-              {t('home.faq6A')}
-            </p>
           </div>
         </div>
       </section>
