@@ -39,7 +39,7 @@ export default function HomeHero() {
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Button>
           </a>
-          <a href="/catalog" className="no-underline">
+          <a href="https://docs.next.monesy.cn" className="no-underline" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="pill" className="text-base px-8 h-13">
               {t('home.heroSecondary')}
             </Button>

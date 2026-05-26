@@ -185,6 +185,7 @@ const DEFAULT_BRAND: BrandConfig = {
       { i18n: 'nav.products', children: [
         { i18n: 'nav.catalog', href: '/catalog' },
       ] },
+      { i18n: 'nav.docs', href: 'https://docs.next.monesy.cn', external: true },
       { i18n: 'nav.legal', children: [
         { i18n: 'nav.terms', href: '/legal/terms' },
         { i18n: 'nav.privacy', href: '/legal/privacy' },
