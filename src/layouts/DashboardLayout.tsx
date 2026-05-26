@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { switchLanguage } from '@/i18n';
 import {
@@ -14,10 +13,9 @@ import { useAuthStore } from '@/stores/auth';
 import { brandName, sidebar } from 'virtual:brand';
 import SidebarNav from '@/components/SidebarNav';
 
-export default function DashboardLayout() {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuthStore();
-  const navigate = useNavigate();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const closeSidebar = () => setSidebarOpen(false);
@@ -29,7 +27,7 @@ export default function DashboardLayout() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/');
+    window.location.href = '/';
   };
 
   const initials = user?.displayName?.slice(0, 2).toUpperCase() || user?.username?.slice(0, 2).toUpperCase() || '??';
@@ -52,14 +50,14 @@ export default function DashboardLayout() {
       >
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-5 border-b border-hairline shrink-0">
-          <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline" onClick={closeSidebar}>
+          <a href="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline" onClick={closeSidebar}>
             <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="32" height="32" rx="6" fill="#090c10" />
               <path d="M8 22V12L16 8L24 12V22L16 26L8 22Z" stroke="#00d1a7" strokeWidth="1.5" fill="none" />
               <circle cx="16" cy="17" r="3" fill="#00d1a7" />
             </svg>
             {brandName}
-          </Link>
+          </a>
           <button
             onClick={closeSidebar}
             className="md:hidden ml-auto p-1 text-mute hover:text-ink bg-transparent border-0 cursor-pointer"
@@ -124,11 +122,11 @@ export default function DashboardLayout() {
           >
             <ChevronLeft className="h-4 w-4" />
             <span className="hidden sm:inline">{t('common.backToHome')}</span>
-          </Link>
+          </a>
         </div>
 
         <main className="flex-1 p-4 sm:p-6">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
