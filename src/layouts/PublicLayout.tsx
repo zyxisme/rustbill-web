@@ -1,10 +1,9 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { switchLanguage } from '@/i18n';
 import { Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import { brandName, logo, tagline, header } from 'virtual:brand';
 import NavMenu from '@/components/NavMenu';
 
@@ -21,12 +20,19 @@ function BrandLogo() {
   return <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>;
 }
 
-export default function PublicLayout() {
+export default function PublicLayout({ children }: { children: ReactNode }) {
   const { t, i18n } = useTranslation();
   const { user } = useAuthStore();
-  const location = useLocation();
   const [menuState, setMenuState] = useState<'closed' | 'open' | 'closing'>('closed');
   const closeTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [pathname, setPathname] = useState('/');
+
+  useEffect(() => {
+    setPathname(window.location.pathname);
+    const handlePop = () => setPathname(window.location.pathname);
+    window.addEventListener('popstate', handlePop);
+    return () => window.removeEventListener('popstate', handlePop);
+  }, []);
 
   const closeMenu = () => {
     setMenuState('closing');
@@ -40,14 +46,13 @@ export default function PublicLayout() {
 
   useEffect(() => {
     if (menuState === 'open') closeMenu();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     return () => clearTimeout(closeTimerRef.current);
   }, []);
 
-  const isDashboard = location.pathname.startsWith('/dashboard');
+  const isDashboard = pathname.startsWith('/dashboard');
   const navItems = header?.nav ?? [
     { i18n: 'nav.home', href: '/' },
     { i18n: 'nav.products', children: [
@@ -67,10 +72,10 @@ export default function PublicLayout() {
         <div className="mx-auto max-w-[1400px] h-full flex items-center px-6">
           {/* Left: Logo */}
           <div className="flex-1 flex justify-start">
-            <Link to="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
+            <a href="/" className="flex items-center gap-2 text-ink font-semibold text-lg tracking-tight no-underline shrink-0">
               <BrandLogo />
               {logo && <span className="text-ink font-semibold text-lg tracking-tight">{brandName}</span>}
-            </Link>
+            </a>
           </div>
 
           {/* Center: Nav */}
@@ -95,18 +100,18 @@ export default function PublicLayout() {
                   {t('nav.logout')}
                 </Button>
               ) : (
-                <Link to="/dashboard" className="no-underline">
+                <a href="/dashboard" className="no-underline">
                   <Button variant="primary" size="sm">{t('nav.dashboard')}</Button>
-                </Link>
+                </a>
               )
             ) : (
               <>
-                <Link to="/login" className="no-underline">
+                <a href="/login" className="no-underline">
                   <Button variant="secondary" size="sm">{t('nav.login')}</Button>
-                </Link>
-                <Link to="/register" className="no-underline">
+                </a>
+                <a href="/register" className="no-underline">
                   <Button variant="primary" size="sm">{t('nav.register')}</Button>
-                </Link>
+                </a>
               </>
             )}
           </div>
@@ -140,21 +145,21 @@ export default function PublicLayout() {
             <div className="pt-2 border-t border-hairline flex items-center gap-2">
               {user ? (
                 <>
-                  <Link to="/dashboard" onClick={() => closeMenu()} className="no-underline flex-1">
+                  <a href="/dashboard" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="primary" size="sm" className="w-full">{t('nav.dashboard')}</Button>
-                  </Link>
+                  </a>
                   <Button variant="secondary" size="sm" onClick={() => { useAuthStore.getState().logout(); closeMenu(); }}>
                     {t('nav.logout')}
                   </Button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" onClick={() => closeMenu()} className="no-underline flex-1">
+                  <a href="/login" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="secondary" size="sm" className="w-full">{t('nav.login')}</Button>
-                  </Link>
-                  <Link to="/register" onClick={() => closeMenu()} className="no-underline flex-1">
+                  </a>
+                  <a href="/register" onClick={() => closeMenu()} className="no-underline flex-1">
                     <Button variant="primary" size="sm" className="w-full">{t('nav.register')}</Button>
-                  </Link>
+                  </a>
                 </>
               )}
             </div>
@@ -163,7 +168,7 @@ export default function PublicLayout() {
       </header>
 
       <main className="flex-1">
-        <Outlet />
+        {children}
       </main>
 
       {/* Footer */}
@@ -172,7 +177,7 @@ export default function PublicLayout() {
           <div>
             <div className="text-sm font-mono text-mute uppercase tracking-wider mb-4">{t('footer.product')}</div>
             <div className="space-y-2">
-              <Link to="/catalog" className="block text-sm text-body hover:text-link no-underline">{t('nav.catalog')}</Link>
+              <a href="/catalog" className="block text-sm text-body hover:text-link no-underline">{t('nav.catalog')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.pricing')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.api')}</a>
             </div>
@@ -180,7 +185,7 @@ export default function PublicLayout() {
           <div>
             <div className="text-sm font-mono text-mute uppercase tracking-wider mb-4">{t('footer.support')}</div>
             <div className="space-y-2">
-              <Link to="/dashboard/tickets" className="block text-sm text-body hover:text-link no-underline">{t('nav.myTickets')}</Link>
+              <a href="/dashboard/tickets" className="block text-sm text-body hover:text-link no-underline">{t('nav.myTickets')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.docs')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.faq')}</a>
             </div>
@@ -190,8 +195,8 @@ export default function PublicLayout() {
             <div className="space-y-2">
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.about')}</a>
               <a href="#" className="block text-sm text-body hover:text-link no-underline">{t('footer.contact')}</a>
-              <Link to="/legal/terms" className="block text-sm text-body hover:text-link no-underline">{t('footer.terms')}</Link>
-              <Link to="/legal/privacy" className="block text-sm text-body hover:text-link no-underline">{t('footer.privacy')}</Link>
+              <a href="/legal/terms" className="block text-sm text-body hover:text-link no-underline">{t('footer.terms')}</a>
+              <a href="/legal/privacy" className="block text-sm text-body hover:text-link no-underline">{t('footer.privacy')}</a>
             </div>
           </div>
           <div>

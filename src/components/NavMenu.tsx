@@ -1,9 +1,20 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useRef } from 'react';
 import type { NavItem } from 'virtual:brand';
+
+function usePathname() {
+  const [pathname, setPathname] = useState(() =>
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+  useEffect(() => {
+    const handler = () => setPathname(window.location.pathname);
+    window.addEventListener('popstate', handler);
+    return () => window.removeEventListener('popstate', handler);
+  }, []);
+  return pathname;
+}
 
 function navLabel(t: (key: string) => string, item: NavItem): string {
   if (item.i18n) {
@@ -15,9 +26,9 @@ function navLabel(t: (key: string) => string, item: NavItem): string {
 
 function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
   const { t } = useTranslation();
-  const location = useLocation();
+  const pathname = usePathname();
   const label = navLabel(t, item);
-  const isActive = item.href && location.pathname === item.href;
+  const isActive = item.href && pathname === item.href;
 
   if (!item.href) {
     return <span className="text-sm text-body">{label}</span>;
@@ -37,8 +48,8 @@ function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
   }
 
   return (
-    <Link
-      to={item.href}
+    <a
+      href={item.href}
       className={cn(
         'text-sm leading-none no-underline transition-colors',
         mobile
@@ -49,20 +60,20 @@ function NavLink({ item, mobile }: { item: NavItem; mobile?: boolean }) {
       )}
     >
       {label}
-    </Link>
+    </a>
   );
 }
 
 function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
   const { t } = useTranslation();
-  const location = useLocation();
+  const pathname = usePathname();
   const label = navLabel(t, item);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -90,13 +101,13 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
         {open && (
           <div className="ml-3 space-y-1 mt-1">
             {item.children.map((child: NavItem) => (
-              <Link
+              <a
                 key={child.i18n || child.label}
-                to={child.href || '#'}
+                href={child.href || '#'}
                 className="block py-1 text-sm text-body hover:text-ink no-underline transition-colors"
               >
                 {navLabel(t, child)}
-              </Link>
+              </a>
             ))}
           </div>
         )}
@@ -122,13 +133,13 @@ function NavDropdown({ item, mobile }: { item: NavItem; mobile?: boolean }) {
         <div className="absolute top-full left-0 mt-2 min-w-[180px] bg-canvas-soft border border-hairline rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.4)] z-50">
           <div className="py-1.5">
             {item.children.map((child: NavItem) => (
-              <Link
+              <a
                 key={child.i18n || child.label}
-                to={child.href || '#'}
+                href={child.href || '#'}
                 className="block px-4 py-2 text-sm text-center text-body hover:text-ink hover:bg-canvas-soft-2 no-underline transition-colors"
               >
                 {navLabel(t, child)}
-              </Link>
+              </a>
             ))}
           </div>
         </div>

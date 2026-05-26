@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Server, TrendingUp, Users, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -34,17 +33,17 @@ export default function HomeHero() {
 
         {/* CTAs */}
         <div className="mt-8 flex items-center gap-3 flex-wrap justify-center">
-          <Link to="/register" className="no-underline">
+          <a href="/register" className="no-underline">
             <Button variant="primary" size="pill" className="text-base px-8 h-13">
               {t('home.heroCTA')}
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Button>
-          </Link>
-          <Link to="/catalog" className="no-underline">
+          </a>
+          <a href="/catalog" className="no-underline">
             <Button variant="outline" size="pill" className="text-base px-8 h-13">
               {t('home.heroSecondary')}
             </Button>
-          </Link>
+          </a>
         </div>
 
         {/* Stats row */}
