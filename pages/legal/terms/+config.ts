@@ -1,1 +1,1 @@
-export default { prerender: true };
+export default { ssr: true, prerender: true };
