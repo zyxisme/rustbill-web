@@ -1,6 +1,6 @@
 import { termsSEO } from '@/seo';
 
-export function Head() {
+export default function Head() {
   const meta = termsSEO();
   return (
     <>

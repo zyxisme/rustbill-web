@@ -1,7 +1,6 @@
 import { homeSEO } from '@/seo';
-import { brandName } from 'virtual:brand';
 
-export function Head() {
+export default function Head() {
   const meta = homeSEO();
   return (
     <>
@@ -18,8 +17,4 @@ export function Head() {
       )}
     </>
   );
-}
-
-export function config() {
-  return { prerender: true };
 }

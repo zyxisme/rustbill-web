@@ -1,4 +1,4 @@
 export default {
-  prerender: false,
+  prerender: true,
   ssr: false,
 };
