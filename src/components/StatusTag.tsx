@@ -38,12 +38,12 @@ export const TICKET_STATUS: Record<string, string> = {
 };
 
 export const INSTANCE_STATUS: Record<string, string> = {
-  active: 'status.instance.active',
   running: 'status.instance.running',
   stopped: 'status.instance.stopped',
   suspended: 'status.instance.suspended',
   provisioning: 'status.instance.provisioning',
   terminated: 'status.instance.terminated',
+  error: 'status.instance.error',
 };
 
 // ── Status-to-color maps ──
@@ -85,12 +85,12 @@ const TICKET_COLORS: Record<string, Variant> = {
 };
 
 const INSTANCE_COLORS: Record<string, Variant> = {
-  active: 'success',
   running: 'success',
   stopped: 'error',
   suspended: 'warning',
   provisioning: 'warning',
   terminated: 'default',
+  error: 'error',
 };
 
 // ── StatusTag component ──

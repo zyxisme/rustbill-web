@@ -120,7 +120,8 @@
       "stopped": "已停止",
       "suspended": "已暂停",
       "provisioning": "开通中",
-      "terminated": "已销毁"
+      "terminated": "已销毁",
+      "error": "异常"
     }
   },
   "priority": {
@@ -439,9 +440,12 @@
     "colCreatedAt": "创建时间",
     "colRegion": "区域",
     "filterAll": "全部实例",
+    "filterProvisioning": "开通中",
     "filterActive": "运行中",
     "filterStopped": "已停止",
+    "filterSuspended": "已暂停",
     "filterTerminated": "已销毁",
+    "filterError": "异常",
     "totalInstances": "共 {{count}} 个实例"
   },
   "instanceDetail": {

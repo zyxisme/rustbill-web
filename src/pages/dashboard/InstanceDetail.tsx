@@ -165,16 +165,25 @@ export default function InstanceDetail() {
     if (!instance) return;
     setActionLoading(action.id);
     try {
-      // Instance actions are performed via the provider plugin.
-      // The frontend triggers the action by calling getInstance with an action param,
-      // or via a dedicated RPC (provider-specific). For now, delegate to the API
-      // which may have a performInstanceAction method added.
-      const apiAny = api as Record<string, unknown>;
-      if (typeof apiAny.performInstanceAction === 'function') {
-        await (apiAny.performInstanceAction as (instanceId: string, actionId: string) => Promise<unknown>)(instance.id, action.id);
+      switch (action.id) {
+        case 'start':
+          await api.startInstance(instance.id);
+          break;
+        case 'stop':
+          await api.stopInstance(instance.id);
+          break;
+        case 'restart':
+        case 'reboot':
+          await api.restartInstance(instance.id);
+          break;
+        case 'terminate':
+        case 'destroy':
+          await api.terminateInstance(instance.id);
+          break;
+        default:
+          console.warn('Unknown instance action:', action.id);
       }
       toast({ title: t('common.success'), description: action.label });
-      // Refresh data after action
       await fetchInstance();
     } catch (err) {
       const message = err instanceof Error ? err.message : t('error.generic');

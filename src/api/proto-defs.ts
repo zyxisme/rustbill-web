@@ -593,6 +593,40 @@ export const GetInstanceResponseDef: MessageDef = {
   ],
 };
 
+// ── Instance Operations ────────────────────────────────────────
+
+export const StartInstanceRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
+};
+
+export const StartInstanceResponseDef: MessageDef = {
+  fields: [{ no: 1, name: 'instance', type: 'message', message: InstanceInfoDef }],
+};
+
+export const StopInstanceRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
+};
+
+export const StopInstanceResponseDef: MessageDef = {
+  fields: [{ no: 1, name: 'instance', type: 'message', message: InstanceInfoDef }],
+};
+
+export const RestartInstanceRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
+};
+
+export const RestartInstanceResponseDef: MessageDef = {
+  fields: [{ no: 1, name: 'instance', type: 'message', message: InstanceInfoDef }],
+};
+
+export const TerminateInstanceRequestDef: MessageDef = {
+  fields: [{ no: 1, name: 'id', type: 'string' }],
+};
+
+export const TerminateInstanceResponseDef: MessageDef = {
+  fields: [],
+};
+
 // ── balance.proto ─────────────────────────────────────────────
 
 export const BalanceTransactionInfoDef: MessageDef = {

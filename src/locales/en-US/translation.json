@@ -120,7 +120,8 @@
       "stopped": "Stopped",
       "suspended": "Suspended",
       "provisioning": "Provisioning",
-      "terminated": "Terminated"
+      "terminated": "Terminated",
+      "error": "Error"
     }
   },
   "priority": {
@@ -454,9 +455,12 @@
     "colCreatedAt": "Created",
     "colRegion": "Region",
     "filterAll": "All Instances",
+    "filterProvisioning": "Provisioning",
     "filterActive": "Running",
     "filterStopped": "Stopped",
+    "filterSuspended": "Suspended",
     "filterTerminated": "Terminated",
+    "filterError": "Error",
     "totalInstances": "{{count}} instances"
   },
   "instanceDetail": {

@@ -56,6 +56,14 @@ import {
   ListInstancesResponseDef,
   GetInstanceRequestDef,
   GetInstanceResponseDef,
+  StartInstanceRequestDef,
+  StartInstanceResponseDef,
+  StopInstanceRequestDef,
+  StopInstanceResponseDef,
+  RestartInstanceRequestDef,
+  RestartInstanceResponseDef,
+  TerminateInstanceRequestDef,
+  TerminateInstanceResponseDef,
   GetBalanceRequestDef,
   GetBalanceResponseDef,
   ListBalanceTransactionsRequestDef,
@@ -596,6 +604,46 @@ export const api = {
       'GetInstance',
       GetInstanceRequestDef,
       GetInstanceResponseDef,
+      { id },
+    );
+  },
+
+  startInstance(id: string) {
+    return grpcCall(
+      'rustbill.instance.InstanceService',
+      'StartInstance',
+      StartInstanceRequestDef,
+      StartInstanceResponseDef,
+      { id },
+    );
+  },
+
+  stopInstance(id: string) {
+    return grpcCall(
+      'rustbill.instance.InstanceService',
+      'StopInstance',
+      StopInstanceRequestDef,
+      StopInstanceResponseDef,
+      { id },
+    );
+  },
+
+  restartInstance(id: string) {
+    return grpcCall(
+      'rustbill.instance.InstanceService',
+      'RestartInstance',
+      RestartInstanceRequestDef,
+      RestartInstanceResponseDef,
+      { id },
+    );
+  },
+
+  terminateInstance(id: string) {
+    return grpcCall(
+      'rustbill.instance.InstanceService',
+      'TerminateInstance',
+      TerminateInstanceRequestDef,
+      TerminateInstanceResponseDef,
       { id },
     );
   },

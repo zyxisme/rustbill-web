@@ -46,9 +46,12 @@ const PAGE_SIZE = 20;
 
 const STATUS_OPTIONS = [
   { value: '', labelKey: 'instances.filterAll' },
+  { value: 'provisioning', labelKey: 'instances.filterProvisioning' },
   { value: 'active', labelKey: 'instances.filterActive' },
   { value: 'stopped', labelKey: 'instances.filterStopped' },
+  { value: 'suspended', labelKey: 'instances.filterSuspended' },
   { value: 'terminated', labelKey: 'instances.filterTerminated' },
+  { value: 'error', labelKey: 'instances.filterError' },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────
@@ -78,8 +81,7 @@ export default function MyInstances() {
     setError(null);
     try {
       const resp = (await api.listInstances({
-        page,
-        pageSize: PAGE_SIZE,
+        pagination: { page, pageSize: PAGE_SIZE },
         status: statusFilter || undefined,
       })) as Record<string, unknown>;
 
